@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script src='/static/LoHi.js' defer></script> 
+<script src='/static/dist_matrice_anim.js' defer></script> 
+
+<div style='padding-top:20px;padding-left:50px' >
+<div  id='stat_table'>
+<h3>Matrice de distances (construite avec les fichiers LoHi)</h3>
+</div>
+<p>{{ df | safe  }}</p>
+
+<p>
+    <input id="namef" name="text"  placeholder='nom du fichier'>
+    <input style='width:50px' title="Enregistrer la matrice" type="submit" value="CSV" onclick="exportTableToCSV()" >
+    <input style='width:50px' title="Enregistrer l'arbre phylogénétique associé" type="submit" value="NWK" onclick='downloadNewick({{tree|tojson}})' >
+</p>
+
+
+
+</div>
+
+<div style='padding-top:20px;padding-left:50px'>
+<div id='stat_table'>
+<h3>Minimum spanning tree</h3>
+</div>
+ <input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:50px' title="Enregistrer le mst au format PNG" type="submit" value="MST" onclick='downloadMST({{ f|tojson }})' >
+
+<img rel="icon" type="image/png" src={{ f }} style={{ w }} >
+
+</div>
+{% endblock %}

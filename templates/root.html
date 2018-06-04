@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src='/static/new_analyse.js' defer></script> 
+<div style='margin-left:30px;margin-top:25px'>
+<h1 style='font-style:italic;'>TBtr<span class='special-style'>app</span></h1>
+
+
+<div id='acceuil'>
+<ul id='acceuil'>
+    <a  href="{{url_for('analyse_list', val='SNP_hi')}}" id='acceuil' title='Liste des échantillons MTBC'><img rel="icon "   type="image/png" src="/static/images/order.png" style="height:90px;padding:10px;display:table;margin:0px auto;margin-top:25px" ></a>
+    <a  href="{{url_for('analyse_Hi_align', val='SNP_hi')}}" id='acceuil' title='Effectuer un alignement'><img rel="icon "   type="image/png" src="/static/images/play-button.png" style="height:90px;padding:10px;display:table;margin:0px auto;margin-top:25px" ></a>
+    <a onclick='new_A()'  id='acceuil' title='Mise à jour de la base de données des échantillons'><img rel="icon "   type="image/png" src="/static/images/database.png" style="height:90px;padding:10px;display:table;margin:0px auto;margin-top:25px" ></a>
+    
+</ul>
+</div>
+
+<div  id='acceuil'>
+	<p style='font-weight:bold;padding:5px;padding-left:20px'>À propos de TBtrapp</p>
+<p style='padding:5px;text-indent:25px;padding-left:20px'>TBtrapp est une application web simplifiant l'alignement multiples de souches de TB génotypées. Elle dispose d'une interface graphique fonctionnelle et est simple d'utilisation. Le résultat de l'alignement est représenté à travers une matrice de distances interactive ainsi que sous la forme d'un minimum spanning tree. Elle permet, in fine, de détecter des potentiels cas de transmission TB entre patients sur la seule base d'informations génétiques. Pour plus d'informations, se référer au <a href='#' style='text-decoration:underline;' onclick=" window.open('/static/images/documentation_v180427.pdf','_blank', 'fullscreen=yes'); return false;" >manuel d'utilisation</a>.</p>
+</div>
+</div>
+{% endblock %}

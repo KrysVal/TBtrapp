@@ -1,0 +1,695 @@
+body {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size:14px;
+  margin:0px 0px; /*.5em 1em;*/
+overflow:auto;
+  letter-spacing:1px;
+  width:100%;
+  min-height:1000px;
+  
+  
+}
+body.wait
+{
+cursor:wait !important;
+
+}
+
+
+hmtl.wait, html.wait *
+{
+cursor:wait !important;
+
+}
+
+div#acceuil
+{
+background-color: lightgrey;
+border-radius:5px;
+border: 0.5px solid grey;
+width:950px;
+height:250px;
+display: table;
+margin:10px auto;
+margin-top:40px;
+}
+
+div#stat_table
+{
+background-color: lightgrey;
+border-radius:5px;
+border: 0.5px solid grey;
+width:1000px;
+text-align:center;
+
+margin-top:100px;
+margin-bottom:50px;
+margin-left:400px;
+
+padding-top:20px;
+padding-bottom:20px;
+
+
+}
+
+
+ul#acceuil
+{
+
+display:table;
+margin:0 auto;
+margin-left:80px;
+
+height:250px;
+}
+
+
+a#db:hover
+{
+cursor:pointer;
+}
+
+a#acceuil
+{
+background-color: #14485f;
+display:inline-block;
+width:200px;
+height:140px;
+color: white;
+font-weight:bold;
+margin:15px;
+margin-top:55px;
+
+border:2px solid grey;
+
+border-radius:10px;
+transition: all 0.6s;
+
+}
+
+ a#acceuil:hover
+{
+background-color: gray;
+
+cursor: pointer;
+
+}
+
+a {
+  text-decoration: none;
+  color:#14485f;
+}
+
+header {
+  background-color:#14485f; /*#14485f;*/
+  color:white;
+  
+  margin: 0;
+  padding: .5em .25em;
+  width:100%;
+  height:40px;
+  
+}
+
+.titre
+{
+margin-left:30px;
+}
+
+.back
+{
+
+margin-left:10px;
+}
+
+header a {
+color:white;
+font-weight:bold;
+
+}
+
+footer {
+  margin-top: 1em;
+  text-align: right;
+  /*background-color: lightgray ;url('images/footer.png')*/
+   width:100%;
+  height:120px;
+
+margin-top:100px;
+margin-bottom:100px;
+  
+  
+    clear:both;
+}
+
+header {
+  
+  
+  margin-bottom: 1em;
+  
+}
+
+/**** buttons ****/
+
+th#aligner
+{
+border-top:none;
+border-right:none;
+border-bottom:none;
+background-color: white;
+}
+
+
+
+button, input[type=submit]
+{
+background-color: #14485f;
+border: none;
+    color: white;
+    font-weight:bold;
+	margin-top:5px;	
+	padding:5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius:3px;
+    transition: all 0.6s;
+}
+
+button:hover, input[type=submit]:hover
+{
+background-color: lightgray;
+
+cursor: pointer;
+
+}
+
+button:disabled, input[type=submit]:disabled{
+  
+  background-color: #cccccc;
+  color: #666666;
+  cursor:auto;
+}
+
+/*** liste déroulante ****/
+
+select {
+background-color: lightgray;
+border: none;
+border-radius: 3px;
+padding:5px 10px;
+}
+
+
+
+
+/**** tables **/
+
+table{
+overflow: hidden;
+border-collapse:collapse;
+}
+
+ 
+ 
+ table.dist  {
+ border: 2px solid black;
+ 
+ }
+
+table.dist td
+
+{
+border:1.5px solid darkgrey;
+
+}
+
+table.dist th
+{
+background-color: rgb(65,65,65);
+padding:8px;
+text-align: center;
+border:1.5px solid darkgrey;
+color: white;
+font-weight:normal;
+letter-spacing:0.88px;
+
+
+} 
+
+.hover
+{
+background-color: grey;
+
+
+}
+
+
+.dist td:hover
+
+{
+background-color: lightgrey!important;
+color:black;
+font-weight:bold!important;
+
+}
+
+.dist td
+{
+ 
+ padding:8px;
+ text-align: center;
+ border:1.5px solid black;}
+
+
+.customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:50% ;
+    
+    border-collapse:collapse;
+    
+}
+
+.customers td, .customers th, .customers thead th {
+    border: 1.5px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+
+
+.customers tr:hover{background-color: #ddd;
+						}
+						
+
+
+.customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #14485f;
+    color: white;
+    
+}
+.customers td.toolbox {
+  background-color: white;
+  border:none;
+ }
+ 
+
+
+.customers thead
+{
+width:50px;}
+
+
+
+/* Supprime les styles appliqués par défaut aux listes. S'applique également à la sous-liste */
+.nav {
+    list-style: none none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    vertical-align: middle; 
+    
+}
+.nav a {
+    display: table-cell;
+    padding:.5em;
+    color: white;
+    font-weight:bold;
+    
+    text-decoration: none;
+    width:100px;
+    height:35px;
+    text-align:center;
+    vertical-align:middle;
+    border-radius:2px;
+    
+}
+.nav a:focus,
+.nav a:hover {
+    background:lightgray;
+    height:35px;
+    transition: all 0.6s;
+    
+    
+    
+    
+}
+.nav-item {
+    float: left; /* Pour que les liens s’affichent horizontalement */
+    position: relative; /* Crée un contexte de positionnement pour les sous-listes */
+    
+    transition: all 0.6s;
+    }
+    
+    
+}
+.sub-nav{
+background: black;
+    display: none; /* Masque la sous-liste */
+    position: absolute; /* Evite que la dimension du conteneur ne change quand la sous-liste est affichée */
+    left: 1.7px; /* FIX IE7 : pour que le sous-menu s’aligne avec son conteneur */
+    top: 2.95em; /* FIX IE7 : pour que le sous-menu s’aligne avec son conteneur, on le positionne explicitement en bas du conteneur */
+    white-space: nowrap; /* Pour que le texte ne revienne pas à la ligne */
+    background: white; /* FIX IE7 : évite que la sous-liste ne disparaisse au moment où le curseur arrive au-dessus */
+    margin-top: -3.5px; /* Pour que le sous-menu recouvre son parent, facilitant le passage de la souris de l’un à l’autre */
+    
+}
+
+.sub-nav-left {
+background: black;
+    display: none; /* Masque la sous-liste */
+    position: absolute; /* Evite que la dimension du conteneur ne change quand la sous-liste est affichée */
+    right: 100%; /* FIX IE7 : pour que le sous-menu s’aligne avec son conteneur */
+    top: 2.95em; /* FIX IE7 : pour que le sous-menu s’aligne avec son conteneur, on le positionne explicitement en bas du conteneur */
+    white-space: nowrap; /* Pour que le texte ne revienne pas à la ligne */
+    background: white; /* FIX IE7 : évite que la sous-liste ne disparaisse au moment où le curseur arrive au-dessus */
+    margin-top: -3.5px; /* Pour que le sous-menu recouvre son parent, facilitant le passage de la souris de l’un à l’autre */
+    
+	
+}
+
+.nav .sub-nav {
+    
+    transition: all 0.6s;
+    }
+
+.nav-item:hover .sub-nav {
+    display: block; /* Affiche cette sous-liste au survol de son conteneur */
+    background-color: #14485f;
+    
+    }
+
+.sub-nav-item:hover .sub-nav-left {
+    display: block; /* Affiche cette sous-liste au survol de son conteneur */
+    background-color: #14485f;
+	}
+    
+    
+
+.nav-item .menu {
+    
+    transition: all 0.9s;
+	 
+	}
+
+
+.nav-item:hover .menu {
+    
+    transition:all 0.9s;
+	transform: rotate(360deg) scale(0.7)  ; 
+	}
+	
+
+
+
+#right {
+    position: absolute;
+    right: 50px;
+    top:1px;
+    
+    
+    }
+    
+
+input
+{
+border-radius:3px;
+background-color: lightgray;
+border:0px;
+margin-top:5px;
+transition: all 0.6s;
+}
+
+#myInput {
+  margin-left:100px;
+  border-radius: 5px;
+	padding:5px 10px 5px 35px;
+	background-image: url('images/magnifier-tool.png');
+	 background-size: 15px ;
+	background-position: 10px 8px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+}
+
+#namef, #namemst
+{
+padding:5px 10px;
+height:30px;
+background-color:white;
+}
+
+
+#rechercher
+{
+margin-left:20px;
+}
+
+table.view#customers 
+{
+
+width:300px;
+}
+
+
+
+
+.gauche
+{
+float:left;
+width:600px;
+
+}
+.droite
+{
+
+margin-left:600px;
+margin-top:25px;
+}
+
+
+.histo > img
+{
+
+transform: translate(-700px,-500px) scale(0.3);
+
+}
+
+
+/**** loader ****/
+
+.loader {
+    margin:auto;
+    
+    margin-top:130px;
+    margin-bottom:200px;
+    border: 16px solid #14485f; /* Light grey */
+    border-bottom: 16px solid rgb(247,247,247);
+    
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1.8s linear infinite;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    /*25% { transform: rotate(40deg); }
+    50% { transform: rotate(180deg); }
+    75% {transform: rotate(320deg);}*/
+    100% { transform: rotate(360deg); }
+}
+
+
+
+
+/**** pop-up ***/
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+
+
+
+
+
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#globale p
+ {
+ text-align:center;
+ animation: roll 2s linear infinite;
+ }
+
+@keyframes roll {
+    0% { opacity:1;  }
+    25% { opacity:0.6;  }
+    50% { opacity:0.2;  }
+    75% { opacity:0.6;  }
+    100% { opacity:1%; }
+}
+
+
+.special-style
+{
+color:rgb(60,144,255);
+
+}
+#haut
+{
+position:fixed;
+right:50px;
+bottom:50px;
+width:50px;
+height:50px;
+opacity:0.8;
+
+
+}
+
+#aligner
+{
+position:fixed;
+right:200px;
+top:520px;
+}
+
+#lohi
+{
+position:absolute;
+right:200px;
+top:370px;
+}
+
+
+
+.defileParent {
+	display: block;
+	margin: 3em auto;
+	overflow: hidden;
+	position: relative;
+	table-layout: fixed;
+	width: 900px;
+	height:50px;
+	background-color: #cccccc;
+	border-radius:5px;
+	
+}
+
+
+.defile {
+	display:block;
+	-moz-animation:linear marqueelike 20s infinite ;
+	margin-left:-100%;
+	padding:0 5px;
+	margin-top:12.5px;
+	text-align:left;
+	height:25px;
+
+}
+
+.defile:after {
+	content:attr(data-text);
+	position:absolute;
+	white-space:nowrap;
+	/*padding-left:10px;*/
+}
+
+
+@-moz-keyframes marqueelike {
+ 	0% {margin-left:0;}
+ 	100% {margin-left:-100%;}
+ }
+
+
+
+
+
+/* les blocks défilants */
+.marque [data-text] {
+  white-space: nowrap;
+  display: inline-block;
+  /min-width: 200%;
+
+  margin-top:100px;
+  background-color: lightgray;
+  height:60px;
+  padding-top:20px;
+  
+              /* 2 fois la largeur du conteneur */
+}
+
+
+
+.marque [data-text]:before,
+.marque [data-text]:after {
+  content: attr( data-text) "\00A0";  /* plus espace en fin */
+  display: inline-block;
+  min-width: 50%;                     /* la moitié du parent */
+}
+
+
+.marque [data-text]:before {
+  animation-name: marque-defil;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+}
+@keyframes marque-defil {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -50%;
+  }
+}
+
+
+
+#innerdiv{
+margin-left:400px;
+margin-top:100px;
+width:2200px;
+}
