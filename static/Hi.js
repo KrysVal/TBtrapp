@@ -24,6 +24,10 @@ HTMLElement.prototype.pseudoStyle = function(element,prop,value){
 
 
 
+
+
+
+
 /*
 let cells = document.querySelectorAll("table.dist td");
 
@@ -433,3 +437,74 @@ $(document).ready(
 				let s = document.getElementById("selected");
 				let size3 = $('.check:checked').length;	
 				s.textContent=size3;})})
+
+
+
+/* Comportement associé à la sélection d'un cluster de transmission */ 
+
+/*
+function cluster_sel()
+{
+var a = $('select#clus option:selected').val();
+var list_ids = a.split(';');
+console.log(list_ids);
+
+var rows = $('table tbody tr td:first-child');
+
+
+rows.each(function(index,element){
+		
+		
+		if (list_ids.includes($(this).text()))
+		{
+		console.log($(this).closest('tr').find('[type=checkbox]')[0]);
+		$(this).closest('tr').find('[type=checkbox]')[0].prop('checked',true);
+	
+		}
+		else
+		{
+		$(this).closest('tr').find('[type=checkbox]')[0].prop('checked',false);
+			}
+
+
+	});
+	
+}*/
+
+
+
+let sele = document.querySelector('#clus');
+sele.addEventListener('change',test);
+
+function test() 
+			{ 
+				
+				var cluster = $('select#clus option:selected').val();
+				var c = cluster.split(';');
+				var rows = $('table tbody tr td:first-child');
+
+				
+				
+				for (let r of rows)
+				
+		
+				{
+				
+				if (c.includes(r.innerHTML))
+					{
+					console.log(r.parentNode)
+					r.parentNode.click();
+	
+						}
+				else
+			{
+		
+			}}
+			
+	$('#sel').click();
+
+
+				
+				
+				}
+

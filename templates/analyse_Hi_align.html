@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <script src='/static/liste.js' defer></script> 
-<script src='/static/Hi.js' defer></script> 
+<script src='/static/Hi.js' defer></script>
+<script src='/static/selection.js' defer></script> 
+
 
 
 <div id='globale' style='padding-top:20px;padding-left:35px;padding-right:35px'>
@@ -18,9 +21,9 @@
 </div>
 
 
-<select style='width:100%;height:auto;background-color:white' multiple >
+<select id='clus' style='width:100%;height:auto;background-color:white'   multiple >
 {% for r in sel %}
-<option value={{r.name}}>{{ r.name }}</option>
+<option value={{r.value}} >{{ r.name }}</option>
 {% endfor %}
 </select>
 
