@@ -11,11 +11,30 @@
 
 <div id='contenu' >
 
+<div id='selection'>
+
+<div id='add_sel'>
+<input id="cluster_name" name="text"  placeholder='nom du cluster...'> <button id="add_b" class="sel_b"  title="ajouter un cluster de transmission"><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="supprimer un cluster de transmission"><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
+</div>
+
+
+<select style='width:100%;height:auto;background-color:white' multiple >
+{% for r in sel %}
+<option value={{r.name}}>{{ r.name }}</option>
+{% endfor %}
+</select>
+
+
+
+
+</div>
+
+
 <!-- box de renseignement sur ce qui est affiché -->
 <div  id='stat_table' >
 <p><h3><span id='tabletot' style='color:#14485f;font-weight:bold'></span> analyses au total</h3></p>
-<p><h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyse(s) affiché(s) </h3></p>
-<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionné(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="afficher la sélection seulement"> </input></h3></p>
+<p><h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyse(s) affichée(s) </h3></p>
+<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="afficher la sélection seulement"> </input></h3></p>
 </div>
 
 
