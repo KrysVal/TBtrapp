@@ -59,7 +59,7 @@ function  enableB(i)
 	var u=0;
 	
 	for (let ji of j)
-	{ if(ji.checked==true)
+	{ if(ji.checked===true)
 		{u+=1;
 			}};
 			
@@ -252,7 +252,9 @@ $(document).ready(
 				{ $(this).closest('tr').css('background-color', 'rgb(255,120,0)'); } 
 			else 
 				{ $(this).closest('tr').css('background-color', '');} }); });
-				
+
+
+
 
 /* afficher les échantillons sélectionnés seulement */
 
@@ -342,6 +344,9 @@ $(document).ready(
 							event.stopPropagation();})
 							
 				$('#aligner').click(function(event){
+							event.stopPropagation();})
+				
+				$('a').click(function(event){
 							event.stopPropagation();})
 							
 						});
@@ -442,69 +447,40 @@ $(document).ready(
 
 /* Comportement associé à la sélection d'un cluster de transmission */ 
 
-/*
-function cluster_sel()
-{
-var a = $('select#clus option:selected').val();
-var list_ids = a.split(';');
-console.log(list_ids);
 
-var rows = $('table tbody tr td:first-child');
-
-
-rows.each(function(index,element){
-		
-		
-		if (list_ids.includes($(this).text()))
-		{
-		console.log($(this).closest('tr').find('[type=checkbox]')[0]);
-		$(this).closest('tr').find('[type=checkbox]')[0].prop('checked',true);
-	
-		}
-		else
-		{
-		$(this).closest('tr').find('[type=checkbox]')[0].prop('checked',false);
-			}
-
-
-	});
-	
-}*/
-
-
-
-let sele = document.querySelector('#clus');
-sele.addEventListener('change',test);
-
-function test() 
-			{ 
+$(document).ready(
+	function() 
+		{ $('#cluster_sel').keyup(function(event) 
+			{ 	
+				console.log('selected');	
+				let cluster = $('#option').val().split(';');
+				let z = document.querySelectorAll('table tbody tr');
 				
-				var cluster = $('select#clus option:selected').val();
-				var c = cluster.split(';');
-				var rows = $('table tbody tr td:first-child');
-
-				
-				
-				for (let r of rows)
-				
-		
+				for (let zi of z) 
 				{
-				
-				if (c.includes(r.innerHTML))
+				if (cluster.includes(zi.children[0].innerHTML) )
+					
 					{
-					console.log(r.parentNode)
-					r.parentNode.click();
-	
-						}
+					
+					if(zi.children[7].children[0].checked === false)
+						{ 
+							
+							
+							zi.click();
+							}
+							
+							}
+				
 				else
-			{
-		
-			}}
+					{
+						
+					if(zi.children[7].children[0].checked === true)
+						{zi.click();}
+						}
+					
+					
+					}
 			
 	$('#sel').click();
-
-
-				
-				
-				}
-
+		
+		})})

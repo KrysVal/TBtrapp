@@ -3,7 +3,7 @@
 
 <script src='/static/liste.js' defer></script> 
 <script src='/static/Hi.js' defer></script>
-<script src='/static/selection.js' defer></script> 
+
 
 
 
@@ -21,10 +21,11 @@
 </div>
 
 
-<select id='clus' style='width:100%;height:auto;background-color:white'   multiple >
+<select id='cluster_sel' name='test_i' style='width:100%;height:auto;background-color:white' multiple>
 {% for r in sel %}
-<option value={{r.value}} >{{ r.name }}</option>
+<option id='option' value={{r.value}}>{{ r.name }}</option>
 {% endfor %}
+
 </select>
 
 

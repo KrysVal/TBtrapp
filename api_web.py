@@ -367,7 +367,7 @@ def get_selection_Hi():
 		
 		
 		
-		return render_template("dist_matrix_Hi.html", df=df.to_html(classes='dist',border=0), analyses=analyses1)
+		return render_template("dist_matrix_Hi.html", df=df.to_html(classes=('dist','vert-header'),border=0), analyses=analyses1)
 
 @app.route("/Analyses/Align/matrix_hi", methods=['POST'])
 def selection_LoHi():
@@ -552,9 +552,9 @@ def get_selection_LoHi():
 			os.system('rm -r /home/lpe/TBtrapp/static/LoHi')
 		
 		
-			return render_template("dist_matrix_LoHi.html", df=df.to_html(classes='dist',border=0),f=fname,tree=str(phylo_tree))
+			return render_template("dist_matrix_LoHi.html", df=df.to_html(classes=('dist','vert-header'),border=0),f=fname,tree=str(phylo_tree))
 		else:
-			return render_template("dist_matrix_LoHi_2.html", df=df.to_html(classes='dist',border=0),f='/static/images/no-image.jpg',tree=str(phylo_tree))
+			return render_template("dist_matrix_LoHi_2.html", df=df.to_html(classes=('dist','vert-header'),border=0),f='/static/images/no-image.jpg',tree=str(phylo_tree))
 		
 
 

@@ -727,3 +727,14 @@ background-color:lightgrey;
 
 background-color:white;
 }
+
+.vert-header thead th
+{
+writing-mode: vertical-rl;
+min-width:65px;
+
+
+}
+
+
+
