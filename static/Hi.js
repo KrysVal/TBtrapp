@@ -240,7 +240,15 @@ $(document).ready(
 				if ( c === true) 
 				{ $(this).css('background-color', 'rgb(255,120,0)'); } 
 			else 
-				{ $(this).css('background-color','');} }); } );
+				{ $(this).css('background-color','');} }); 
+				
+				
+				$('button').click(function(event){
+							event.stopPropagation();})
+							
+						});
+ 
+				
 $(document).ready(
 	function() 				
 				
@@ -259,6 +267,7 @@ $(document).ready(
 /* afficher les échantillons sélectionnés seulement */
 
 $('#sel').prop('disabled','true');
+
 $(document).ready(
 	function() 
 		{ $('body tr').click(function(event) 
@@ -274,6 +283,24 @@ $(document).ready(
 				{
 				$('#sel').prop('disabled','true');
 				}})})
+				
+				
+$(document).ready(
+	function() 
+		{ $('body tr td input[type=checkbox]').click(function(event) 
+			{ 
+				let s = $('.check:checked').length;
+					
+				if(Number(s) > 0 )
+				{
+				console.log(s)
+				$('#sel').removeAttr("disabled");
+				}
+				else
+				{
+				$('#sel').prop('disabled','true');
+				}})})				
+
 
 $(document).ready(
 	function() 
@@ -297,7 +324,7 @@ $(document).ready(
 				else
 				{
 				
-				$('tbody tr').css('display',"");
+				$('table.customers tbody tr').css('display',"");
 				}
 				let t = document.getElementById("tablesize");
 				let size2 = $('.customers tbody tr:visible').length;	
@@ -319,9 +346,13 @@ $(document).ready(
 				$(this).find('[type=checkbox]').prop('checked',false);
 				
 				
-				$(this).find('tr').css('background-color','');
+				$(this).find('tr:not(.cache)').css('background-color','');
+				/*$(this).find('tr').find('td').css('color','');
+				$(this).find('tr').find('td').find('a').css('color','');
+				$(this).find('.check').removeAttr("disabled");*/
+				
 				enableB(document.querySelector('input[type=checkbox]'));
-				$('tbody tr').css('display',"");
+				$('table.customers tbody tr').css('display',"");
 				
 				let s = document.getElementById("selected");
 				let size3 = $('.check:checked').length;	
@@ -348,6 +379,12 @@ $(document).ready(
 				
 				$('a').click(function(event){
 							event.stopPropagation();})
+				
+				
+							
+							
+				
+					
 							
 						});
  
@@ -412,7 +449,7 @@ function downloadCSV(csv, filename) {
 function all_select()
 {
 
-$('input:checkbox:visible:not(:checked)').trigger('click');
+$('.check:visible:not(:checked)').trigger('click');
 	
 	}
 	
@@ -448,9 +485,7 @@ $(document).ready(
 /* Comportement associé à la sélection d'un cluster de transmission */ 
 
 
-$(document).ready(
-	function() 
-		{ $('#cluster_sel').keyup(function(event) 
+function selectionner() 
 			{ 	
 				console.log('selected');	
 				let cluster = $('#option').val().split(';');
@@ -483,4 +518,68 @@ $(document).ready(
 			
 	$('#sel').click();
 		
-		})})
+		}
+
+
+
+/* Cacher/montrer des analyses dans la matrice de distances Hi_filter */
+
+$(document).ready(
+		function()
+			{ 
+				$('.hidden').click(function(event)
+
+{
+
+
+
+
+/* Si elle n'est pas cachée*/
+if ($(this).closest('tr').css('background-color') === 'rgb(221, 221, 221)')
+
+{
+
+/* Chnagement des aspects de la ligne sélectionnée */
+$(this).closest('tr').css('background-color','darkgrey');
+$(this).closest('tr').find('td').css('color','grey');
+$(this).closest('tr').find('td').find('a').css('color','grey');	
+$(this).closest('tr').find('td').find('input[type=checkbox]').attr("disabled", true);
+$(this).closest('tr').find('td').find('button').find('img').attr('src','/static/images/eye.png')
+$(this).closest('tr').addClass("cache");
+
+/* on cache la ligne */
+var sample = $(this).closest('tr').children()[1].innerHTML;
+$("table.dist tbody tr:has(th:contains('"+sample+"'))").hide();
+
+/* on cache la colonne */
+var index = Number($("table.dist tbody tr:has(th:contains('"+sample+"'))").index())+2;
+$("table.dist td:nth-child("+index+"), table.dist th:nth-child("+index+")").hide();
+
+
+
+
+;
+}
+
+/* si elle est caché */
+else
+
+{
+
+/* comportement opposé */	
+$(this).closest('tr').css('background-color','');
+$(this).closest('tr').find('td').css('color','');
+$(this).closest('tr').find('td').find('a').css('color','');	
+$(this).closest('tr').find('td').find('input[type=checkbox]').removeAttr("disabled");
+$(this).closest('tr').find('td').find('button').find('img').attr('src','/static/images/no-eye.png');
+$(this).closest('tr').removeClass("cache");
+
+var sample = $(this).closest('tr').children()[1].innerHTML;
+$("table.dist tbody tr:has(th:contains('"+sample+"'))").show();
+
+var index = Number($("table.dist tbody tr:has(th:contains('"+sample+"'))").index())+2;
+$("table.dist td:nth-child("+index+"), table.dist th:nth-child("+index+")").show();
+}
+
+
+})})
