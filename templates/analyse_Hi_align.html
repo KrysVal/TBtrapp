@@ -7,6 +7,7 @@
 
 
 
+
 <div id='globale' style='padding-top:20px;padding-left:35px;padding-right:35px'>
 
 
@@ -23,7 +24,7 @@
 
 <select id='cluster_sel' style='width:100%;height:auto;background-color:white' multiple>
 {% for r in sel %}
-<option  id='option' value={{r.value}}>{{ r.name }}</option>
+<option class='option' value={{r.value}}>{{ r.name }}</option>
 {% endfor %}
 
 </select>
@@ -84,10 +85,10 @@
 <!-- boutton permettant de remonter en haut de page -->
 <button id="haut" ><img src='/static/images/arrow-up.png' style='height:22px'></button>
 <!-- boutton permettant de construire la matrice de distances avec les SNP des fichiers Hi_filter -->
-<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers 'xxxHi_filter.csv' des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
+<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
 
 
-<button id="align_file" class='bou' title="Construire un fichier d'alignement des SNPs" onclick="alignement_SNPs()" disabled  >fichier SNPs</button>
+<button id="align_file" class='bou' title="Construire un fichier contenant les séquences artificielles des SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick="alignement_SNPs()" disabled  >séquences SNPs</button>
 </div>
 </div>
 {% endblock %}

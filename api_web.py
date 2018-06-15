@@ -94,7 +94,7 @@ def make_dist_matrix(l):
 	print(len(l_combi))
 	'''
 	taille=len(l_combi)	
-	print(str(taille)+' process detéctés.\n')
+	#print(str(taille)+' process detéctés.\n')
 	
 	i=1
 	for couple in l_combi:# pour chaque couple d'echantillons
@@ -108,7 +108,7 @@ def make_dist_matrix(l):
 			raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 			
 			#print(c,"c'est c")
-		print('Process : '+str(i)+'/'+str(taille))
+		#print('Process : '+str(i)+'/'+str(taille))
 		df[couple[0]][couple[1]]=c # on remplit les cases correspondantes du dataframe
 		df[couple[1]][couple[0]]=c
 		i+=1
@@ -140,7 +140,7 @@ def alignement(dico):
 		l_files.append(val)
 	
 	
-	message="Un fichier d\'alignement va être créé avec les fichiers de variants suivants:\n"
+	#message="Un fichier d\'alignement va être créé avec les fichiers de variants suivants:\n"
 	
 	
 	
@@ -153,7 +153,7 @@ def alignement(dico):
 	#on crée une liste des positions des SNPs dans tout ces fichiers pour créer une matrice avec ces noms de colonnes
 	#######################################################
 	
-	print('[Étape 1/5] Récupération de toutes les positions de SNPs dans les fichiers\n')
+	#print('[Étape 1/5] Récupération de toutes les positions de SNPs dans les fichiers\n')
 	col_names=[]
 	for f in l_files:
 		
@@ -167,7 +167,7 @@ def alignement(dico):
 				col_names.append(p[0])
 
 	col_names.sort()
-	print('[Étape 1/5] Ok\n')
+	#print('[Étape 1/5] Ok\n')
 
 	#####################################
 	#création et remplissage de la matrice d'alignement
@@ -175,7 +175,7 @@ def alignement(dico):
 
 
 	df=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)#
-	print('[Étape 2/5] Initialisation et remplissage de la matrice des SNPs\n')
+	#print('[Étape 2/5] Initialisation et remplissage de la matrice des SNPs\n')
 	for f in l_files:
 		
 		csv=pd.read_csv(f, sep=';') #importation des csv
@@ -200,7 +200,7 @@ def alignement(dico):
 	################################################
 	#remplissage des cellules vides avec la valeur de la référence
 	###############################################
-	print('[Étape 3/5] Remplissage des cellules vides de la matrice avec la valeur de la référence H37Rv\n')
+	#print('[Étape 3/5] Remplissage des cellules vides de la matrice avec la valeur de la référence H37Rv\n')
 
 	for x in col_names:
 		for y in l_files:
@@ -220,7 +220,7 @@ def alignement(dico):
 		
 
 
-	print('[Étape 3/5] Ok\n')
+	#print('[Étape 3/5] Ok\n')
 	#########################################
 	#suppression des colonnes non informatives
 	##########################################
@@ -236,7 +236,7 @@ def alignement(dico):
 		else:
 			col_names2.append(col)
 	'''		
-	print('[Étape 4/5] Suppression des SNPs non-informatifs\n') 
+	#print('[Étape 4/5] Suppression des SNPs non-informatifs\n') 
 	taille=len(l_files)
 	df3=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)
 	
@@ -259,7 +259,7 @@ def alignement(dico):
 			
 			df2.drop(col,1)
 			
-	print('[Étape 4/5] Ok\n')				
+	#print('[Étape 4/5] Ok\n')				
 	#print(df)	
 	 
 	
@@ -267,7 +267,7 @@ def alignement(dico):
 	fna="/static/alignement_"+str(alea)+".fa"
 	fname="/home/lpe/TBtrapp"+fna
 	
-	print('[Étape 5/5] Écriture du résultat dans <%s>\n'%fname)
+	#print('[Étape 5/5] Écriture du résultat dans <%s>\n'%fname)
 	
 	
 	f=open(fname,'w')
@@ -275,14 +275,14 @@ def alignement(dico):
 	li=['ref_h37rv']+l_files
 	#print(li)
 	for l in li:
-		f.write('>'+l+'\n')
+		f.write('>'+l.split('/')[-1].split('.')[0]+'\n')
 		s=''
 		
 		for col in list(df2):
 			s+=str(df2.at[l,col])
 		f.write(s+'\n')
 	
-	print('[Étape 5/5] Ok\n')
+	#print('[Étape 5/5] Ok\n')
 	
 	return fna
 
@@ -575,7 +575,7 @@ def get_selection_Hi():
 @app.route("/Analyses/Align/align_file", methods=['GET'])
 def align_file():
 
-
+	os.system('rm /home/lpe/TBtrapp/static/alignement* ')
 	with get_db() as db:
 		
 		y=request.args.getlist('data')

@@ -28,6 +28,11 @@ HTMLElement.prototype.pseudoStyle = function(element,prop,value){
 
 
 
+
+
+
+
+
 /*
 let cells = document.querySelectorAll("table.dist td");
 
@@ -169,7 +174,10 @@ fetch("http://localhost:5000/Analyses/Align", {
 	console.log(t);
 	window.location.href=t;
     })}
-    
+
+
+
+/* fonction qui permet d'enregistrer le fichier de SNPs */
 function downloadAl(t) {
     
     /*var tree = $('#my-data').data();*/
@@ -180,11 +188,12 @@ function downloadAl(t) {
     downloadLink.classList.add("downl");
 
     // File name
-    downloadLink.download = "alignement_SNPs.fa";
+    downloadLink.download = "sequences_artificielles_SNPs_Hi.fa";
 
     // Create a link to the file
     downloadLink.href = t;
-
+	
+	downloadLink.type = 'text/fa';
     // Hide download link
     downloadLink.style.display = "none";
 
@@ -192,13 +201,15 @@ function downloadAl(t) {
     document.body.appendChild(downloadLink);
 
     // Click download link
-    return downloadLink.click();
+    downloadLink.click();
+    
+    
     
    
 }   
     
 
-/* definit les opérations côté serveur du bouton aligner */
+/* définit l'enchainement des requêtes à effectuer en vue de créer un fichier de séquences artificielles de SNPs  */
 function alignement_SNPs()
 
 {
@@ -208,7 +219,7 @@ names=check_name();
 
 let l=names.length.toString();
 let n = names.toString();
-let text_anim="TBTRAPP INFO : création du fichier d\'alignement des SNPs des fichiers de variants Hi de ".concat(l," échantillons en cours : ",n,'.....' );
+let text_anim="TBTRAPP INFO : création des séquences artificielles des SNPs des fichiers Hi de ".concat(l," échantillons en cours : ",n,'.....' );
 
 
 let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
@@ -242,8 +253,7 @@ fetch(t, {
 		method: 'GET',
     headers: { "content-type": "application/json"}
 		
-		}).then( (res) => {return res.json();}).then( (data) => {
-			console.log(data); return downloadAl(data);}  ).then( (res) => {window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";})  
+		}).then( (res) => {return res.json();}).then( (data) => {let popup = downloadAl(data); return popup}).then( (res) => {window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";})  
     });
     
     
@@ -300,6 +310,13 @@ fetch("http://localhost:5000/Analyses/Align/matrix_hi", {
     })}
 
 
+
+
+
+
+
+
+
 /* facilite la selection*/
 
 $(document).ready(
@@ -337,6 +354,19 @@ $(document).ready(
 							
 						});
  
+
+
+
+
+
+
+
+
+
+
+
+
+
 				
 $(document).ready(
 	function() 				
@@ -393,62 +423,6 @@ $(document).ready(
 
 
 
-/* Comportement associé à la sélection d'un cluster de transmission */ 
-
-$(document).ready(
-		function()
-			{ 
-
-$('select').change(function(event)
-
-{
-let cluster = $(this).find('option:selected').val().split(';');
-let lignes = document.querySelectorAll('table tbody tr');
-	
-for (let r of lignes)			
-				
-				{
-				
-				
-				if (cluster.includes(r.children[0].innerHTML)) 
-					
-					
-					
-					{
-						let ch = r.children[7].children[0];
-						
-						if ( ch.checked === false )
-							
-							{ 
-							console.log(r);
-							r.click();
-							console.log(r);
-							
-							}
-							
-					}
-				
-				else
-					
-					{
-						
-						if(r.children[7].children[0].checked === true)
-							
-							{
-							r.children[7].children[0].click();
-							}
-					
-					
-					}
-					
-		
-		}
-		
-		
-		
-		$('#sel').click();
-					})}) 
-
 
 
 
@@ -456,7 +430,7 @@ $(document).ready(
 	function() 
 		{ $('#sel').click(function(event) 
 			{ 	
-				if ($('#sel').prop('checked')===true)
+				if ($('#sel').prop('checked') === true)
 				
 				{
 				
@@ -482,7 +456,65 @@ $(document).ready(
 				})})			
 				
 				
+/* Comportement associé à la sélection d'un cluster de transmission */
+ 
+ 
+ 
+$(document).ready(
+		function()
+			{ 
+				 
+ $('select#cluster_sel').change(function() 
+
+{
+let cluster = $('option.option:selected').val().split(';');
+let lignes = document.querySelectorAll('table tbody tr');
+	
+for ( l of lignes)			
 				
+				{
+				
+				
+				if (cluster.includes(l.children[0].innerHTML)) 
+					
+					
+					
+					{
+						let ch = l.children[7].children[0];
+						
+						if ( ch.checked === false )
+							
+							{ 
+							console.log(l);
+							l.click();
+							console.log(l);
+							
+							}
+							
+					}
+				
+				else
+					
+					{
+						
+						if(l.children[7].children[0].checked === true)
+							
+							{
+							l.children[7].children[0].click();
+							}
+					
+					
+					}
+					
+		
+		}
+		
+		
+		
+		
+		if (document.querySelector('#sel').checked === false)
+			{document.querySelector('#sel').click();}
+					}).change(); })				
 				
 
 
@@ -542,6 +574,11 @@ $(document).ready(
 						});
  
 
+ 
+
+ 
+ 
+		
 
 
 
@@ -700,3 +737,8 @@ $("table.dist td:nth-child("+index+"), table.dist th:nth-child("+index+")").show
 
 
 })})
+
+
+
+
+
