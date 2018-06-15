@@ -592,9 +592,16 @@ opacity:0.8;
 
 #aligner
 {
-position:fixed;
-right:200px;
-top:520px;
+position:absolute;
+right:310px;
+top:480px;
+}
+
+#align_file
+{
+position:absolute;
+right:400px;
+top:480px;
 }
 
 #lohi

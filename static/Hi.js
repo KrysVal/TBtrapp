@@ -63,14 +63,19 @@ function  enableB(i)
 		{u+=1;
 			}};
 			
-	var bou = document.getElementsByClassName("bou")[0];
+	var bou = document.getElementsByClassName("bou");
 			
 	if (u >= 2)
+		
+		
 		{
-			bou.removeAttribute('disabled',"");
-			}
-	else {bou.setAttribute('disabled',"");
-		}
+			for (let b of bou){
+			b.removeAttribute('disabled',"");
+			}}
+	else {
+		for (let b of bou){
+		b.setAttribute('disabled',"");
+		}}
 	
 		} 
 	
@@ -164,9 +169,93 @@ fetch("http://localhost:5000/Analyses/Align", {
 	console.log(t);
 	window.location.href=t;
     })}
-
-
+    
+function downloadAl(t) {
+    
+    /*var tree = $('#my-data').data();*/
 	
+  
+    // Download link
+    downloadLink = document.createElement("a");
+    downloadLink.classList.add("downl");
+
+    // File name
+    downloadLink.download = "alignement_SNPs.fa";
+
+    // Create a link to the file
+    downloadLink.href = t;
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    return downloadLink.click();
+    
+   
+}   
+    
+
+/* definit les opérations côté serveur du bouton aligner */
+function alignement_SNPs()
+
+{
+
+ids=check_case();
+names=check_name();
+
+let l=names.length.toString();
+let n = names.toString();
+let text_anim="TBTRAPP INFO : création du fichier d\'alignement des SNPs des fichiers de variants Hi de ".concat(l," échantillons en cours : ",n,'.....' );
+
+
+let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
+let x_2= ''.concat(Math.round(x).toString(),'s')
+
+
+let str = '<div class="marque"><div data-text="'.concat(text_anim, '"></div></div>')
+
+$('#contenu').text('');
+
+document.getElementById('globale').style.paddingLeft = "0px";
+$('#globale').append(str);
+document.querySelector(".marque [data-text]").pseudoStyle("before","animation-duration",x_2);
+
+
+$('#contenu').addClass('loader');
+$('body').addClass('wait');
+
+
+
+fetch("http://localhost:5000/Analyses/Align", {
+    method: 'POST',
+    headers: { "content-type": "application/json"},
+    body: JSON.stringify(ids)
+}).then((res)=> {return res.json();}).then((data) => {
+
+var url = "http://localhost:5000/Analyses/Align/align_file";
+var t = url+data;
+console.log(t);
+fetch(t, { 
+		method: 'GET',
+    headers: { "content-type": "application/json"}
+		
+		}).then( (res) => {return res.json();}).then( (data) => {
+			console.log(data); return downloadAl(data);}  ).then( (res) => {window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";})  
+    });
+    
+    
+    
+    
+    }
+
+
+
+		
+
+
 
 /* definit les opérations côté serveur du bouton créer MST */
 function LoHi()
@@ -302,6 +391,67 @@ $(document).ready(
 				}})})				
 
 
+
+
+/* Comportement associé à la sélection d'un cluster de transmission */ 
+
+$(document).ready(
+		function()
+			{ 
+
+$('select').change(function(event)
+
+{
+let cluster = $(this).find('option:selected').val().split(';');
+let lignes = document.querySelectorAll('table tbody tr');
+	
+for (let r of lignes)			
+				
+				{
+				
+				
+				if (cluster.includes(r.children[0].innerHTML)) 
+					
+					
+					
+					{
+						let ch = r.children[7].children[0];
+						
+						if ( ch.checked === false )
+							
+							{ 
+							console.log(r);
+							r.click();
+							console.log(r);
+							
+							}
+							
+					}
+				
+				else
+					
+					{
+						
+						if(r.children[7].children[0].checked === true)
+							
+							{
+							r.children[7].children[0].click();
+							}
+					
+					
+					}
+					
+		
+		}
+		
+		
+		
+		$('#sel').click();
+					})}) 
+
+
+
+
 $(document).ready(
 	function() 
 		{ $('#sel').click(function(event) 
@@ -376,6 +526,9 @@ $(document).ready(
 							
 				$('#aligner').click(function(event){
 							event.stopPropagation();})
+							
+				$('#align_file').click(function(event){
+							event.stopPropagation();})
 				
 				$('a').click(function(event){
 							event.stopPropagation();})
@@ -419,7 +572,8 @@ function exportTableToCSV() {
 function downloadCSV(csv, filename) {
     var csvFile;
     var downloadLink;
-
+	
+	
     // CSV file
     csvFile = new Blob([csv], {type: "text/csv"});
 
@@ -482,43 +636,6 @@ $(document).ready(
 
 
 
-/* Comportement associé à la sélection d'un cluster de transmission */ 
-
-
-function selectionner() 
-			{ 	
-				console.log('selected');	
-				let cluster = $('#option').val().split(';');
-				let z = document.querySelectorAll('table tbody tr');
-				
-				for (let zi of z) 
-				{
-				if (cluster.includes(zi.children[0].innerHTML) )
-					
-					{
-					
-					if(zi.children[7].children[0].checked === false)
-						{ 
-							
-							
-							zi.click();
-							}
-							
-							}
-				
-				else
-					{
-						
-					if(zi.children[7].children[0].checked === true)
-						{zi.click();}
-						}
-					
-					
-					}
-			
-	$('#sel').click();
-		
-		}
 
 
 

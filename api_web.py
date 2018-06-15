@@ -117,6 +117,183 @@ def make_dist_matrix(l):
 	return df
 
 
+
+
+def alignement(dico):
+	
+	
+	######################################################	
+	#on importe les positions des variants conférants résistances (BEAST-Laos project)
+	######################################################
+	
+	resil=pd.read_csv('/home/lpe/SCRIPTSkrystian/alignement/resistance_list.csv', sep=';')
+	resili=resil.ix[:,[0,2]].values
+	resilist=[x[0] for x in resili if x[1]=='SNP']
+	
+	
+	######################################################	
+	#on récupère la liste de tous les fichiers csv du laos
+	######################################################
+	
+	l_files=[]
+	for val in dico.values():
+		l_files.append(val)
+	
+	
+	message="Un fichier d\'alignement va être créé avec les fichiers de variants suivants:\n"
+	
+	
+	
+	
+	
+
+
+		 
+	#######################################################
+	#on crée une liste des positions des SNPs dans tout ces fichiers pour créer une matrice avec ces noms de colonnes
+	#######################################################
+	
+	print('[Étape 1/5] Récupération de toutes les positions de SNPs dans les fichiers\n')
+	col_names=[]
+	for f in l_files:
+		
+		csv=pd.read_csv(f, sep=';') #importation des csv
+		
+		 
+		
+		position=csv.ix[:,[0,2]].values #on recupere les positions de tous les variants
+		for p in position[:,:]:
+			if (p[1]=='SNP') and (p[0] not in col_names) and (p[0] not in resilist):
+				col_names.append(p[0])
+
+	col_names.sort()
+	print('[Étape 1/5] Ok\n')
+
+	#####################################
+	#création et remplissage de la matrice d'alignement
+	######################################
+
+
+	df=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)#
+	print('[Étape 2/5] Initialisation et remplissage de la matrice des SNPs\n')
+	for f in l_files:
+		
+		csv=pd.read_csv(f, sep=';') #importation des csv
+		SNPs=csv.ix[:,[0,4,6]].values #on recupere les positions de tous les variants
+		
+		for x in SNPs[:,:]:
+			ref=x[1]
+			sample=x[2]
+			
+			#try:
+			df.at[f,x[0]]=sample
+			if df.at['ref_h37rv',x[0]] not in ['A','T','C','G']:
+				df.at['ref_h37rv',x[0]]=ref
+			
+
+	print('[Étape 2/5] Ok\n')
+	df2=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)
+
+
+
+
+	################################################
+	#remplissage des cellules vides avec la valeur de la référence
+	###############################################
+	print('[Étape 3/5] Remplissage des cellules vides de la matrice avec la valeur de la référence H37Rv\n')
+
+	for x in col_names:
+		for y in l_files:
+			#print(y)
+			val=df.at[y,x]
+			
+			if val not in ['A','T','C','G']:
+				
+				ref_v=df.at['ref_h37rv',x]
+				df2.at[y,x]=ref_v
+				
+			else:
+				df2.at[y,x]=df.at[y,x]
+
+	for x in col_names:
+		df2.at['ref_h37rv',x]=df.at['ref_h37rv',x]
+		
+
+
+	print('[Étape 3/5] Ok\n')
+	#########################################
+	#suppression des colonnes non informatives
+	##########################################
+	
+	'''
+	col_names2=[]
+	for col in col_names:
+		#on retire les positions soumis à une pression de sélection (BEAST-Laos project)
+		if col in resilist:
+			
+			df2=df2.drop(col,1)
+		
+		else:
+			col_names2.append(col)
+	'''		
+	print('[Étape 4/5] Suppression des SNPs non-informatifs\n') 
+	taille=len(l_files)
+	df3=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)
+	
+	for col in col_names:
+		
+		l=[]
+		for x in l_files:
+			
+			l.append(df2.at[x,col])
+		
+		
+		val=l[0]
+		i=0
+		for j in l:
+			if val==j:
+				i+=1
+		
+		
+		if i == taille:
+			
+			df2.drop(col,1)
+			
+	print('[Étape 4/5] Ok\n')				
+	#print(df)	
+	 
+	
+	alea=random.randint(0,100000000000000)
+	fna="/static/alignement_"+str(alea)+".fa"
+	fname="/home/lpe/TBtrapp"+fna
+	
+	print('[Étape 5/5] Écriture du résultat dans <%s>\n'%fname)
+	
+	
+	f=open(fname,'w')
+
+	li=['ref_h37rv']+l_files
+	#print(li)
+	for l in li:
+		f.write('>'+l+'\n')
+		s=''
+		
+		for col in list(df2):
+			s+=str(df2.at[l,col])
+		f.write(s+'\n')
+	
+	print('[Étape 5/5] Ok\n')
+	
+	return fna
+
+
+
+
+
+
+
+
+
 def test_node(m):
 
 	for node in m:
@@ -322,6 +499,28 @@ def analyse_Hi_align():
 		res = db.execute(query)
 		return render_template("analyse_Hi_align.html", analyses=analyses,sel=res)
 		
+
+
+
+
+@app.route("/Analyses/Align/matrix_hi", methods=['POST'])
+def selection_LoHi():
+
+
+	data = request.get_json()
+	res="?"
+	i=1
+	for x in data:
+		if i<len(data):
+			res+='data='+x+'&'
+			i+=1
+		elif i==len(data):
+			res+='data='+x
+	#print('res : '+res)
+	return jsonify(res)
+	#return jsonify(url_for('get_selection_LoHi',data=data))
+
+	
 @app.route("/Analyses/Align", methods=['POST'])
 def selection_Hi():
 
@@ -337,8 +536,9 @@ def selection_Hi():
 		elif i==len(data):
 			res+='data='+x
 	#print('res : '+res)
-	return jsonify(res)
+	return jsonify(res)	
 	
+
 @app.route("/Analyses/Align/matrix_hi", methods=['GET'])		
 def get_selection_Hi():	
 	
@@ -369,21 +569,40 @@ def get_selection_Hi():
 		
 		return render_template("dist_matrix_Hi.html", df=df.to_html(classes=('dist','vert-header'),border=0), analyses=analyses1)
 
-@app.route("/Analyses/Align/matrix_hi", methods=['POST'])
-def selection_LoHi():
+
+	
+	
+@app.route("/Analyses/Align/align_file", methods=['GET'])
+def align_file():
 
 
-	data = request.get_json()
-	res="?"
-	i=1
-	for x in data:
-		if i<len(data):
-			res+='data='+x+'&'
-			i+=1
-		elif i==len(data):
-			res+='data='+x
-	#print('res : '+res)
-	return jsonify(res)
+	with get_db() as db:
+		
+		y=request.args.getlist('data')
+		#print(y)
+		#val=request.args.get('val')
+		m='('+len(y)*'?,'+')'
+		m=m.replace(',)',')')
+		
+		req=" SELECT id,nom, sample, DEL_hi, INS_hi, SNP_hi, nVariants_hi FROM analyse WHERE id in %s ORDER by SNP_hi " %m
+		req1=" SELECT nom, Hi  FROM analyse WHERE id in %s " %m
+		
+		#print(y)
+		
+		analyses1=db.execute(req, y)
+		analyses= db.execute(req1, y)
+		
+		d={}
+		res=analyses.fetchall()
+		for y in res:
+			d[y['nom'].replace('\t','')]=y['Hi'].replace('\t/','')
+		
+		alignement_fich=alignement(d)
+	
+	
+	
+		return jsonify(alignement_fich)
+		
 	#return jsonify(url_for('get_selection_LoHi',data=data))
 
 
@@ -521,17 +740,17 @@ def get_selection_LoHi():
 				pos_scaled[x]=tuple(l)
 			
 			nx.draw_networkx_edges(G1,pos_scaled)
-			nx.draw_networkx_edge_labels(G1,pos_scaled,edge_labels=labels,font_size=14,font_color='red')
-			nx.draw_networkx_nodes(G1,pos_scaled,nodelist=G1.nodes(),node_color=[ x[1] for x in G1.nodes(data='size')],  cmap=plt.cm.Pastel1, node_size=[ int(x[1])*3000 for x in G1.nodes(data='size')]) #'#14485f'
-			nx.draw_networkx_labels(G1,pos_scaled,edge_labels=labels, font_size=11,font_color='black',font_weight='bold')
+			nx.draw_networkx_edge_labels(G1,pos_scaled,edge_labels=labels,font_size=15,font_color='red')
+			nx.draw_networkx_nodes(G1,pos_scaled,nodelist=G1.nodes(),node_color=[ x[1] for x in G1.nodes(data='size')],  cmap=plt.cm.Pastel1, node_size=[ int(x[1])*6000 for x in G1.nodes(data='size')]) #'#14485f'
+			nx.draw_networkx_labels(G1,pos_scaled,edge_labels=labels, font_size=13,font_color='black',font_weight='bold')
 		
-			cut = 1.50
-			xmax= cut*max(x for (x,y) in pos_scaled.values())
-			ymax= cut*max(y for (x,y) in pos_scaled.values())
-			xmin= cut*min(x for (x,y) in pos_scaled.values())
-			ymin= cut*min(y for (x,y) in pos_scaled.values())
+			
+			xmax= 1.1*max(x for (x,y) in pos_scaled.values())
+			ymax= 1.1*max(y for (x,y) in pos_scaled.values())
+			xmin= 1.1*min(x for (x,y) in pos_scaled.values())
+			ymin= 1.1*min(y for (x,y) in pos_scaled.values())
 			figure = plt.gcf()
-			figure.set_size_inches(25,25)
+			figure.set_size_inches(30,30)
 			#figure.tight_layout()
 			plt.xlim(xmin,xmax)
 			plt.ylim(ymin,ymax)

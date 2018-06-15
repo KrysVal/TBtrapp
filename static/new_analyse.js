@@ -50,5 +50,5 @@ fetch("http://localhost:5000/", {
 						};
 						} 
 					).then( (response) => 
-					{window.location.href="http://localhost:5000/Analyses?val=SNP";} )}
+					{window.location.href="http://localhost:5000/Analyses?val=SNP_hi";} )}
 					

@@ -21,9 +21,9 @@
 </div>
 
 
-<select id='cluster_sel' name='test_i' style='width:100%;height:auto;background-color:white' multiple>
+<select id='cluster_sel' style='width:100%;height:auto;background-color:white' multiple>
 {% for r in sel %}
-<option onclick=selectionner() id='option' value={{r.value}}>{{ r.name }}</option>
+<option  id='option' value={{r.value}}>{{ r.name }}</option>
 {% endfor %}
 
 </select>
@@ -84,7 +84,10 @@
 <!-- boutton permettant de remonter en haut de page -->
 <button id="haut" ><img src='/static/images/arrow-up.png' style='height:22px'></button>
 <!-- boutton permettant de construire la matrice de distances avec les SNP des fichiers Hi_filter -->
-<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers 'xxxHi_filter.csv' des analyses sélectionnées" onclick=aligner_hi() disabled  >aligner</button>
+<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers 'xxxHi_filter.csv' des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
+
+
+<button id="align_file" class='bou' title="Construire un fichier d'alignement des SNPs" onclick="alignement_SNPs()" disabled  >fichier SNPs</button>
 </div>
 </div>
 {% endblock %}
