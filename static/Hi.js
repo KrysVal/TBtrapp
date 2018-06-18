@@ -395,7 +395,7 @@ $(document).ready(
 					
 				if(Number(s) > 0 )
 				{
-				console.log(s)
+				
 				$('#sel').removeAttr("disabled");
 				}
 				else
@@ -412,7 +412,7 @@ $(document).ready(
 					
 				if(Number(s) > 0 )
 				{
-				console.log(s)
+				
 				$('#sel').removeAttr("disabled");
 				}
 				else
@@ -539,13 +539,14 @@ $(document).ready(
 		function()
 			{ 
 				 
- $('select#cluster_sel').change(function() 
+ $('option.option').click(function() 
 
 {
-var cluster = $('option.option:selected').val().split(';');
-var lignes = document.querySelectorAll('table tbody tr');
+let cluster = $('option.option:selected').val().split(';');
+console.log(cluster);
+let lignes = document.querySelectorAll('table tbody tr');
 	
-for (var l of lignes)			
+for (let l of lignes)			
 				
 				{
 				
@@ -560,9 +561,9 @@ for (var l of lignes)
 						if ( ch.checked === false )
 							
 							{ 
-							console.log(l);
+							
 							l.click();
-							console.log(l);
+							
 							
 							}
 							
@@ -592,7 +593,7 @@ for (var l of lignes)
 		else 
 		{document.querySelector('#sel').click();
 			document.querySelector('#sel').click();}
-					}).change(); })
+					}) })
 
 
 
@@ -677,11 +678,12 @@ $(document).ready(
 
 $(document).ready(
 	function() 
-		{ $('table tbody tr').click(function(event) /* input[type=checkbox] */
+		{ $('input[type=checkbox]').click(function(event) 
 			{ 	
 			
 				let s = document.getElementById("selected");
 				let size3 = $('.check:checked').length;	
+				console.log(size3);
 				s.textContent=size3;})})
 
 
