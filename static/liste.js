@@ -12,7 +12,7 @@ let s = document.getElementsByTagName('select')[0];
 /* boutton de trie */
 function trier()
 {
-	let y = document.getElementsByTagName('select')[0];
+	let y = document.querySelector('select#trie');
 	for (ch of y.children)
 	{
 		if (ch.value !== 'trier' && ch.selected === true)

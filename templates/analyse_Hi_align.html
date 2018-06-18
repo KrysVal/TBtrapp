@@ -5,14 +5,6 @@
 <script src='/static/Hi.js' defer></script>
 
 
- 
-
-	
-
-
-
-
-
 <div id='globale' style='padding-top:20px;padding-left:35px;padding-right:35px'>
 
 
@@ -23,7 +15,7 @@
 <div id='selection'>
 
 <div id='add_sel'>
-<input id="cluster_name" name="text"  placeholder='nom du cluster...'> <button id="add_b" class="sel_b"  title="ajouter un cluster de transmission"><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="supprimer un cluster de transmission"><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
+<input id="cluster_name" name="text"  placeholder='nom du cluster...' oninput="add_cluster();"> <button id="add_b" class="sel_b"  title="ajouter un cluster de transmission" disabled><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="supprimer un cluster de transmission" disabled><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
 </div>
 
 
@@ -52,7 +44,7 @@
 <div id='innerdiv'>
 <p>
 <form method="post" action={{url_for('trier_list2')}}>
-<select name='select_val'onchange=trier()>
+<select id="trie" name='select_val'onchange=trier()>
 		
 		  <option value='trier'  disabled selected>trier par...</option>
 		  <option value='id'>id</option>

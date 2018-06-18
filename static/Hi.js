@@ -84,7 +84,10 @@ function  enableB(i)
 	
 		} 
 	
-	
+/* activation du boutton permettant de supprimer un cluster de transmission */	
+
+
+
 
 
 
@@ -188,7 +191,7 @@ function downloadAl(t) {
     downloadLink.classList.add("downl");
 
     // File name
-    downloadLink.download = "sequences_artificielles_SNPs_Hi.fa";
+    downloadLink.download = "sequences_artificielles_SNPs_LoHi.fa";
 
     // Create a link to the file
     downloadLink.href = t;
@@ -219,7 +222,7 @@ names=check_name();
 
 let l=names.length.toString();
 let n = names.toString();
-let text_anim="TBTRAPP INFO : création des séquences artificielles des SNPs des fichiers Hi de ".concat(l," échantillons en cours : ",n,'.....' );
+let text_anim="TBTRAPP INFO : création des séquences artificielles des SNPs des fichiers LoHi de ".concat(l," échantillons en cours : ",n,'.....' );
 
 
 let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
@@ -542,6 +545,7 @@ $(document).ready(
  $('option.option').click(function() 
 
 {
+let bou_del = $('button#del_sel').removeAttr('disabled');
 let cluster = $('option.option:selected').val().split(';');
 console.log(cluster);
 let lignes = document.querySelectorAll('table tbody tr');
@@ -756,4 +760,132 @@ $("table.dist td:nth-child("+index+"), table.dist th:nth-child("+index+")").show
 
 
 
+/* fonction permettant la suppression d'un cluster de transmission */
+ 
+ 
+ 
+$(document).ready(
+		function()
+			{ 
+				 
+ $('button#del_sel').click(function() 
 
+{
+let name = $('option.option:selected').text();
+console.log(name);	
+message='[ Suppression cluster ]\n\nVous êtes sur le point de supprimer le cluster de transmission : \n<';
+message+=name;
+message+='>\nSouhaitez vous vraiment continuer ?' 
+let conf = confirm(message);
+console.log(conf);
+
+message2='[ Suppression cluster ]\n\nLe cluster <';
+message2+=name
+message2+='> a bien été supprimé'
+
+if (conf === true)
+{
+fetch("/Analyses/Align/del_selection", {
+    method: 'POST',
+    headers: { "content-type": "application/json"},
+    body: JSON.stringify(name)
+}).then( (reponse) => { return alert(message2);} ).then( (response) => {window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";} )	
+	
+	
+	}
+
+	
+	})})
+
+
+/* fonction permettant l'ajout d'un cluster de transmission */
+ 
+ 
+ 
+
+function add_cluster()
+ {
+	
+	if ($("input#cluster_name").val().length>5 && $('input.check:checked').length > 1 )
+	
+		{
+		$('button#add_b').removeAttr("disabled");
+		}
+		
+	else
+		
+		{
+		$('button#add_b').prop('disabled','true');
+		}
+	 
+	 }
+
+
+/* fonction permettant l'ajout d'un cluster de transmission */
+ 
+ 
+ 
+$(document).ready(
+		function()
+			{ 
+				 
+ $('button#add_b').click(function() 
+
+
+
+{
+	$('body').addClass('wait');
+	let n = {};
+	n['cluster_name'] = $("input#cluster_name").val();
+	n['ids'] = check_case();
+	
+	mess='[ Ajout cluster ]\n\nLe cluster de transmission <';
+	mess+=$("input#cluster_name").val();
+	mess+='> a été ajouté avec succès.' 
+	
+	
+	fetch("/Analyses/Align/new_selection", {
+    method: 'POST',
+    headers: { "content-type": "application/json"},
+    body: JSON.stringify(n)
+	}).then( (response) => 
+				
+		{console.log(response.status);
+			 if (!response.ok) 
+		
+		{
+			return response.json().then((data) => {console.log(data);
+			alert(data['error']);
+			window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";})}
+		
+		else 
+		
+		{alert(mess);
+		window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";} 
+		
+		} )
+	
+	
+	})})
+	
+	
+	
+$(document).ready(
+	function() 
+		{ $('body tr').click(function(event)
+			{
+			if ($("input#cluster_name").val().length>5 && $('input.check:checked').length > 1 )
+	
+		{
+		$('button#add_b').removeAttr("disabled");
+		}
+		
+	else
+		
+		{
+		$('button#add_b').prop('disabled','true');
+		}	
+				
+				})
+			 })
+			

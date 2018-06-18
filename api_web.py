@@ -191,7 +191,7 @@ def alignement(dico):
 				df.at['ref_h37rv',x[0]]=ref
 			
 
-	print('[Étape 2/5] Ok\n')
+	#print('[Étape 2/5] Ok\n')
 	df2=pd.DataFrame(index=['ref_h37rv']+l_files,columns=col_names)
 
 
@@ -257,7 +257,7 @@ def alignement(dico):
 		
 		if i == taille:
 			
-			df2.drop(col,1)
+			df2=df2.drop(col,1)
 			
 	#print('[Étape 4/5] Ok\n')				
 	#print(df)	
@@ -585,7 +585,7 @@ def align_file():
 		m=m.replace(',)',')')
 		
 		req=" SELECT id,nom, sample, DEL_hi, INS_hi, SNP_hi, nVariants_hi FROM analyse WHERE id in %s ORDER by SNP_hi " %m
-		req1=" SELECT nom, Hi  FROM analyse WHERE id in %s " %m
+		req1=" SELECT nom, Hi, Lo  FROM analyse WHERE id in %s " %m
 		
 		#print(y)
 		
@@ -594,11 +594,42 @@ def align_file():
 		
 		d={}
 		res=analyses.fetchall()
+		
 		for y in res:
-			d[y['nom'].replace('\t','')]=y['Hi'].replace('\t/','')
+			
+			d[y['nom'].replace('\t','')]=[y['Hi'].replace('\t/',''), y['Lo'].replace('\t/','')]
+			
+		
+		os.system('mkdir /home/lpe/TBtrapp/static/LoHi')
+		
+		#creation de lien symbolique pour les fichiers Lo et Hi des analyses seléctionnées
+		for key in d:	
+			
+			for csv in d[key]:
+				os.system('ln -s /home/lpe/TBtrapp/%s /home/lpe/TBtrapp/static/LoHi' %csv)
+		
+		#execution du script d'analyse transversale
+		os.system('./PanalyseTransversale.pl -in  /home/lpe/TBtrapp/static/LoHi')
+		
+		#suppression des liens symbolique et du mst precedemment créé
+		os.system('rm /home/lpe/TBtrapp/static/LoHi/*filter.csv')
+		
+		
+		#creation du dictionnaire d'entree du script de création de la matrice de distance
+		for key in d:
+			
+			lohicsv=re.sub('static/RUN/RUN_.*/','/home/lpe/TBtrapp/static/LoHi/',d[key][0])
+			lohicsv=re.sub('Hi_filter.csv','Hi_filter.LoHi.csv',lohicsv)
+			 
+			d[key]=lohicsv
+			
+		for k in d.keys():
+				print(d[k])
+		
 		
 		alignement_fich=alignement(d)
 	
+		os.system('rm -r /home/lpe/TBtrapp/static/LoHi')
 	
 	
 		return jsonify(alignement_fich)
@@ -889,8 +920,8 @@ def new_selection():
 				return erreur(200,'ok')
 				
 			else:
-				
-				message=u'[! conflit !]\n\n\n\nLa base de donées des clusters contient déjà un cluster \n'+name+'\nChoisissez un autre nom. '
+				ni=name.replace("'","")
+				message=u'[! conflit !]\n\nLa base de donées des clusters contient déjà un cluster <'+ni+'>\nChoisissez un autre nom. '
 				e=erreur(409,message)
 				return e
 				
