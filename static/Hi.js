@@ -450,71 +450,20 @@ $(document).ready(
 				
 				$('table.customers tbody tr').css('display',"");
 				}
+				
+				
 				let t = document.getElementById("tablesize");
 				let size2 = $('.customers tbody tr:visible').length;	
 				t.textContent=size2;
+				
 				})})			
 				
-				
-/* Comportement associé à la sélection d'un cluster de transmission */
- 
- 
- 
-$(document).ready(
-		function()
-			{ 
-				 
- $('select#cluster_sel').change(function() 
 
-{
-let cluster = $('option.option:selected').val().split(';');
-let lignes = document.querySelectorAll('table tbody tr');
-	
-for ( l of lignes)			
+
+
+
 				
-				{
-				
-				
-				if (cluster.includes(l.children[0].innerHTML)) 
-					
-					
-					
-					{
-						let ch = l.children[7].children[0];
-						
-						if ( ch.checked === false )
-							
-							{ 
-							console.log(l);
-							l.click();
-							console.log(l);
-							
-							}
-							
-					}
-				
-				else
-					
-					{
-						
-						if(l.children[7].children[0].checked === true)
-							
-							{
-							l.children[7].children[0].click();
-							}
-					
-					
-					}
-					
-		
-		}
-		
-		
-		
-		
-		if (document.querySelector('#sel').checked === false)
-			{document.querySelector('#sel').click();}
-					}).change(); })				
+			
 				
 
 
@@ -565,13 +514,16 @@ $(document).ready(
 				$('a').click(function(event){
 							event.stopPropagation();})
 				
+				$('option').click(function(event){
+							event.stopPropagation();})
+				
 				
 							
 							
 				
 					
 							
-						});
+						})
  
 
  
@@ -579,7 +531,68 @@ $(document).ready(
  
  
 		
+/* Comportement associé à la sélection d'un cluster de transmission */
+ 
+ 
+ 
+$(document).ready(
+		function()
+			{ 
+				 
+ $('select#cluster_sel').change(function() 
 
+{
+var cluster = $('option.option:selected').val().split(';');
+var lignes = document.querySelectorAll('table tbody tr');
+	
+for (var l of lignes)			
+				
+				{
+				
+				
+				if (cluster.includes(l.children[0].innerHTML)) 
+					
+					
+					
+					{
+						var ch = l.children[7].children[0];
+						
+						if ( ch.checked === false )
+							
+							{ 
+							console.log(l);
+							l.click();
+							console.log(l);
+							
+							}
+							
+					}
+				
+				else
+					
+					{
+						
+						if(l.children[7].children[0].checked === true)
+							
+							{
+							l.children[7].children[0].click();
+							}
+					
+					
+					}
+					
+		
+		}
+		
+		
+		
+		
+		if (document.querySelector('#sel').checked === false)
+			{document.querySelector('#sel').click();}
+		else 
+		{document.querySelector('#sel').click();
+			document.querySelector('#sel').click();}
+					}).change(); })
 
 
 
@@ -664,7 +677,7 @@ $(document).ready(
 
 $(document).ready(
 	function() 
-		{ $('input[type=checkbox]').click(function(event) 
+		{ $('table tbody tr').click(function(event) /* input[type=checkbox] */
 			{ 	
 			
 				let s = document.getElementById("selected");
