@@ -6,10 +6,10 @@
 
 
 <div  id='stat_table'>
-<h3>Matrice de distances (construite avec les fichiers LoHi)</h3>
+<h3>Matrice de distances (fichiers LoHi)</h3>
 <input id="namef" name="text"  placeholder='nom du fichier'>
 <input style='width:100px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
-<input style='width:120px' title="Enregistrer l'arbre phylogénétique au format NWK construit avec la méthode du neighboor-joining associé à la matrice"  type="submit" value="exporter arbre" onclick='downloadNewick({{tree|tojson}})' >
+<input style='width:120px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining"  type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
 </div>
 
 

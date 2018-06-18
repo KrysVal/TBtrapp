@@ -33,24 +33,7 @@ HTMLElement.prototype.pseudoStyle = function(element,prop,value){
 
 
 
-/*
-let cells = document.querySelectorAll("table.dist td");
 
-for (let c of cells)
-{ c.addEventListener('mouseover', function() { overF(c);});}
-
-function overF(x)
-{
-	name1=x.parentElement.children[0].textContent;
-	
-	b=x.cellIndex;
-	name2=document.querySelector('table.dist thead').children[0].children[b].textContent;
-	
-	
-	
-	console.log(name1,name2);}
-
-*/
 
 /* activer/desactiver le bouton aligner */
 let xy = document.querySelectorAll('input[type=checkbox]')
@@ -84,7 +67,7 @@ function  enableB(i)
 	
 		} 
 	
-/* activation du boutton permettant de supprimer un cluster de transmission */	
+
 
 
 
@@ -146,7 +129,7 @@ names=check_name();
 
 let l=names.length.toString();
 let n = names.toString();
-let text_anim="TBTRAPP INFO : alignement des SNPs des fichiers de variants Hi de ".concat(l," échantillons en cours : ",n,'.....' );
+let text_anim="TBTRAPP INFO : création de la matrice de distances par comparaison des SNPs des fichiers de variants <xxxclean.PVD.Hi_filter.csv> de ".concat(l," analyses en cours : ",n,'.....' );
 
 
 let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
@@ -222,7 +205,7 @@ names=check_name();
 
 let l=names.length.toString();
 let n = names.toString();
-let text_anim="TBTRAPP INFO : création des séquences artificielles des SNPs des fichiers LoHi de ".concat(l," échantillons en cours : ",n,'.....' );
+let text_anim="TBTRAPP INFO : création des séquences artificielles des SNPs des fichiers de variants <xxx.LoHi.csv> de ".concat(l," analyses en cours : ",n,'.....' );
 
 
 let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
@@ -281,7 +264,7 @@ names=check_name();
 
 let l=names.length.toString();
 let n = names.toString();
-let text_anim="TBTRAPP INFO : alignement des SNPs des fichiers de variants LoHi de ".concat(l," échantillons en cours : ",n,'.....' );
+let text_anim="TBTRAPP INFO : création de la matrice de distances (en SNPs) des fichiers de variants <xxx.LoHi.csv> et du MST associé de ".concat(l," analyses en cours : ",n,'.....' );
 
 
 let x = text_anim.length * 0.135;/* permet d'adapter la durée de l'animation en fonction de la taille du texte */ 
@@ -717,7 +700,8 @@ $(this).closest('tr').css('background-color','darkgrey');
 $(this).closest('tr').find('td').css('color','grey');
 $(this).closest('tr').find('td').find('a').css('color','grey');	
 $(this).closest('tr').find('td').find('input[type=checkbox]').attr("disabled", true);
-$(this).closest('tr').find('td').find('button').find('img').attr('src','/static/images/eye.png')
+$(this).closest('tr').find('td').find('button').find('img').attr('src','/static/images/eye.png');
+$(this).closest('tr').find('td').find('button').attr('title','Afficher l\'analyse dans la matrice de distances');
 $(this).closest('tr').addClass("cache");
 
 /* on cache la ligne */
@@ -745,6 +729,7 @@ $(this).closest('tr').find('td').css('color','');
 $(this).closest('tr').find('td').find('a').css('color','');	
 $(this).closest('tr').find('td').find('input[type=checkbox]').removeAttr("disabled");
 $(this).closest('tr').find('td').find('button').find('img').attr('src','/static/images/no-eye.png');
+$(this).closest('tr').find('td').find('button').attr('title','Masquer l\'analyse dans la matrice de distances');
 $(this).closest('tr').removeClass("cache");
 
 var sample = $(this).closest('tr').children()[1].innerHTML;

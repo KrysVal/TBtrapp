@@ -15,7 +15,7 @@
 <div id='selection'>
 
 <div id='add_sel'>
-<input id="cluster_name" name="text"  placeholder='nom du cluster...' oninput="add_cluster();"> <button id="add_b" class="sel_b"  title="ajouter un cluster de transmission" disabled><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="supprimer un cluster de transmission" disabled><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
+<input id="cluster_name" name="text"  placeholder='nom du cluster...' oninput="add_cluster();"> <button id="add_b" class="sel_b"  title="Ajouter un cluster de transmissions" disabled><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="Supprimer le cluster de transmissions sélectionné " disabled><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
 </div>
 
 
@@ -36,7 +36,7 @@
 <div  id='stat_table' >
 <p><h3><span id='tabletot' style='color:#14485f;font-weight:bold'></span> analyses au total</h3></p>
 <p><h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyse(s) affichée(s) </h3></p>
-<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="afficher la sélection seulement"> </input></h3></p>
+<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="Afficher uniquement les analyses sélectionnées"> </input></h3></p>
 </div>
 
 
@@ -53,15 +53,15 @@
 		  <option value='nVariants_hi'>nVariants</option>
 
 </select>
-<input disabled id="boutton_trier" type="submit" value="trier" title="trier le tableau" method='post'/>
-<input type="text" placeholder='Search for...' id='myInput' title="rechercher une analyse dans la base de données" onkeyup=search()  />
+<input disabled id="boutton_trier" type="submit" value="trier" title="Trier le tableau" method='post'/>
+<input type="text" placeholder='Search for...' id='myInput' title="Rechercher une analyse dans la base de données" onkeyup=search()  />
 </form>
 </p>
 
 
 <!-- tableau d'affichage des analyses de la BD -->
 <table class='customers'>
-  <thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="sélectionner tous les échantillons affichés"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
+  <thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
   
   <tbody>
 		{% for a in analyses %}

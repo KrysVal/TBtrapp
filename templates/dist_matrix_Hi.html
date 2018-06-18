@@ -9,8 +9,8 @@
 
 <!-- box de renseignement sur ce qui est affiché -->
 <div  id='stat_table'>
-<h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> échantillons  </h3>
-<h3><span id='selected' style='color:#14485f;font-weight:bold'></span> selectionnés <input style=";margin-left:20px" type='checkbox' id="sel" title="afficher la sélection seulement"> </input>  </h3>
+<h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyses  </h3>
+<h3><span id='selected' style='color:#14485f;font-weight:bold'></span> selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="afficher la sélection seulement"> </input>  </h3>
 </div>
 
 
@@ -18,7 +18,7 @@
 
 <!-- tableau d'affichage des analyses sélectionnées pour construire la matrice de distances -->
 <table class='customers'>
-<thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="sélectionner tous les échantillons affichés"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
+<thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
 		<tbody>
 		{% for a in analyses %}
 		<tr>
@@ -30,7 +30,7 @@
 		<td style='font-weight:bold'>{{a.SNP_hi}}</td>
 		<td>{{a.nVariants_hi}}</td>
 		<td><input  type="checkbox" class="check" ></td>
-		<td><button class='hidden'><img src="/static/images/no-eye.png" style='width:20px'></button></td>
+		<td><button class='hidden' title="Masquer l'analyse dans la matrice de distances"><img src="/static/images/no-eye.png" style='width:20px'></button></td>
         </tr>
 		{% endfor %}
   </tbody>
@@ -40,7 +40,7 @@
 
 <!-- matrice de distances -->
 <div  id='stat_table'>
-<h3>Matrice de distances (construite avec les fichiers "Hi_filter")</h3>
+<h3>Matrice de distances (fichiers Hi)</h3>
 <!-- bouton pour enregistrer la matrice au format CSV -->
 <input id="namef" name="text"  placeholder='nom du fichier'> <input style='width:100px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
 </div>
@@ -55,7 +55,7 @@
 
 
 <!-- bouton pour créer un MST -->    
-<button id="lohi" class='bou'  title="exécution du script PanalyseTransversale.pl et alignement des SNPs des fichiers LoHi créés" onclick="LoHi()" disabled >créer MST</button>
+<button id="lohi" class='bou'  title="Exécution du script PanalyseTransversale.pl sur les analyses sélectionnées, calcul de la matrice de distances (en SNPs) des fichiers <xxx.LoHi.csv> créés et construction du MST correspondant" onclick="LoHi()" disabled >créer MST</button>
 
 </div>
 

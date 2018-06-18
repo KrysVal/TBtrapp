@@ -28,10 +28,10 @@
 			<li class="sub-nav-item" ><a href="#" style='cursor:default;width:150px;height:45px' >analyses</a>
 				<ul class="nav sub-nav-left analyse" style='width:60px' >
 				
-				<li class="sub-nav-item"><a style='width:60px;height:45px' title="liste des échantillons" href="{{url_for('analyse_list', val='SNP_hi')}}"><img rel="icon "   type="image/png" src="/static/images/list.png" style="height:22px" ></a></li>
-            			<li class="sub-nav-item" ><a style='width:60px;height:45px' id='db' title="mise à jour de la base de données" onclick='new_A()'><img  rel="icon " class="menu"  type="image/png" src="/static/images/add-database-button-for-interface.png" style="height:28px " ></a></li></ul></li>
+				<li class="sub-nav-item"><a style='width:60px;height:45px' title="Liste des analyses" href="{{url_for('analyse_list', val='SNP_hi')}}"><img rel="icon "   type="image/png" src="/static/images/list.png" style="height:22px" ></a></li>
+            			<li class="sub-nav-item" ><a style='width:60px;height:45px' id='db' title="Mise à jour de la base de données" onclick='new_A()'><img  rel="icon " class="menu"  type="image/png" src="/static/images/add-database-button-for-interface.png" style="height:28px " ></a></li></ul></li>
 
-            		<li class="sub-nav-item" style='width:150px'><a style='width:150px;height:45px' title="Lancer un alignement" href="{{url_for('analyse_Hi_align', val='SNP_hi')}}">aligner</a></li>
+            		<li class="sub-nav-item" style='width:150px'><a style='width:150px;height:45px' title="Page de sélection des analyses" href="{{url_for('analyse_Hi_align', val='SNP_hi')}}">sélection</a></li>
         </ul>
     </li>
     </ul>
