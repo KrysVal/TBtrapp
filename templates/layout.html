@@ -1,47 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>TBtrapp</title>
-   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-   <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"> 
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
-   <script src="https://code.jquery.com/jquery-1.10.2.js" ></script>
-   <script src='/static/new_analyse.js' defer></script>
-   
-
-   
-
-  </head>
-  <body>
-      <header><a href="javascript:history.back()" class="back" title="go back"><img rel="icon " type="image/png" src="/static/images/go-back-left-arrow.png" style="height:17.5px" ></a>
-		  <a style="font-style:italic;font-size:15px" class="titre" title="Aller à la page d'acceuil" href="{{url_for('root')}}">TBtr<span class="special-style">app</span></a>
-			
-    
-    
-    <ul class="nav" >
-    <li class="nav-item" id="right">
-        <a  href="#" style='width:150px'><img rel="icon " class="menu" type="image/png" src="/static/images/menu.png" style="height:27px" ></a>
-        <ul class="nav sub-nav" >
-			
-			<li class="sub-nav-item" ><a href="#" style='cursor:default;width:150px;height:45px' >analyses</a>
-				<ul class="nav sub-nav-left analyse" style='width:60px' >
-				
-				<li class="sub-nav-item"><a style='width:60px;height:45px' title="Liste des analyses" href="{{url_for('analyse_list', val='SNP_hi')}}"><img rel="icon "   type="image/png" src="/static/images/list.png" style="height:22px" ></a></li>
-            			<li class="sub-nav-item" ><a style='width:60px;height:45px' id='db' title="Mise à jour de la base de données" onclick='new_A()'><img  rel="icon " class="menu"  type="image/png" src="/static/images/add-database-button-for-interface.png" style="height:28px " ></a></li></ul></li>
-
-            		<li class="sub-nav-item" style='width:150px'><a style='width:150px;height:45px' title="Page de sélection des analyses" href="{{url_for('analyse_Hi_align', val='SNP_hi')}}">sélection</a></li>
-        </ul>
-    </li>
-    </ul>
-      </header>
-      {% block content %}{% endblock %}
-      
-      
+	
+<!-- fichier qui décrit la forme de toutes les pages de l'application -->	
+	
+<!-- On précise l'encodage, les fichiers de styles et les scripts javascript communs à toutes les pages -->	
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>TBtrapp</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"> 
+	<script src="https://code.jquery.com/jquery-1.10.2.js" ></script>
+	<script src='/static/new_analyse.js' defer></script>
+</head>
   
+  
+  
+<body>
+	<header>
+	
+	
+	<!-- haut de page à gauche -->
+		<a href="javascript:history.back()" class="back" title="go back"><img rel="icon " type="image/png" src="/static/images/go-back-left-arrow.png" style="height:17.5px" ></a>
+		<a style="font-style:italic;font-size:15px" class="titre" title="Aller à la page d'acceuil" href="{{url_for('root')}}">TBtr<span class="special-style">app</span></a>
+			
+    
+    
+    
+    <!-- haut de page à droite - menu déroulant -->
+    <ul class="nav" >
+		<li class="nav-item" id="right">
+			<a  href="#" style='width:150px'><img rel="icon " class="menu" type="image/png" src="/static/images/menu.png" style="height:27px" ></a>
+    
+    
+    
+    
+    
+    <ul class="nav sub-nav" >
+		
+		<li class="sub-nav-item" ><a href="#" style='cursor:default;width:150px;height:45px' >analyses</a>
+			<ul class="nav sub-nav-left analyse" style='width:60px' >
+				<li class="sub-nav-item"><a style='width:60px;height:45px' title="Liste des analyses" href="{{url_for('analyse_list', val='SNP_hi')}}"><img rel="icon "   type="image/png" src="/static/images/list.png" style="height:22px" ></a></li>
+				<li class="sub-nav-item" ><a style='width:60px;height:45px' id='db' title="Mise à jour de la base de données" onclick='new_A()'><img  rel="icon " class="menu"  type="image/png" src="/static/images/add-database-button-for-interface.png" style="height:28px " ></a></li>
+			</ul>
+		</li>
 
-  </body>
-  <footer> <img style='float:right;margin-right:20px;height:110px;top:5px' src='/static/images/logo_fm.png'> <p style='float:right;margin-right:20px;margin-top:50px;font-size:13px'>©2018 Fondation Mérieux</p></footer>
+		<li class="sub-nav-item" style='width:150px'><a style='width:150px;height:45px' title="Page de sélection des analyses" href="{{url_for('analyse_Hi_align', val='SNP_hi')}}">sélection</a></li>
+	</ul>
+		
+	</header>
+      
+
+<!-- Le contenu de chaque page est ensuite précisé à ce niveau-->      
+{% block content %}
+{% endblock %}
+
+
+<!-- pied de page -->
+<footer>
+<img style='float:right;margin-right:20px;height:110px;top:5px' src='/static/images/logo_fm.png'> <p style='float:right;margin-right:20px;margin-top:50px;font-size:13px'>©2018 Fondation Mérieux</p>
+</footer>
+
+
+
+</body>
 </html>
-

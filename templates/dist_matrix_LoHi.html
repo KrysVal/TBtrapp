@@ -1,29 +1,34 @@
 {% extends "layout.html" %}
+
 {% block content %}
 
+<!-- template lorsque un MST a pu être créé -->
 <script src='/static/LoHi.js' defer></script> 
 <script src='/static/dist_matrice_anim.js' defer></script> 
 
-
+<!-- bouttons pour enregistrer la matrice et l'arbre phylo  -->
 <div  id='stat_table'>
-<h3>Matrice de distances (construite avec les fichiers LoHi)</h3>
-<input id="namef" name="text"  placeholder='nom du fichier'>
-<input style='width:50px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
-<input style='width:50px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining" type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
+	<h3>Matrice de distances (fichiers LoHi)</h3>
+	<input id="namef" name="text"  placeholder='nom du fichier'>
+	<input style='width:50px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
+	<input style='width:50px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining" type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
 </div>
 
+
+<!-- matrice de distances -->
 <div id='innerdiv'>
-<p>{{ df | safe  }}</p>
+	<p>{{ df | safe  }}</p>
 </div>
 
 
-
+<!-- boutton pour enregistrer le png du MST -->
 <div id='stat_table'>
-<h3>Minimum spanning tree</h3>
-<input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:50px' title="Enregistrer le minimm spanning tree au format PNG" type="submit" value="exporter" onclick='downloadMST({{ f|tojson }})' >
+	<h3>Minimum spanning tree</h3>
+	<input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:50px' title="Enregistrer le minimm spanning tree au format PNG" type="submit" value="exporter" onclick='downloadMST({{ f|tojson }})' >
 </div>
  
- <div id='innerdiv'>
-<img rel="icon" type="image/png" src={{ f }} style="width:1300px" >
+<!-- affichage du MST --> 
+<div id='innerdiv'>
+	<img rel="icon" type="image/png" src={{ f }} style="width:1300px" >
 </div>
 {% endblock %}

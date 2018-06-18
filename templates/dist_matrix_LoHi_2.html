@@ -1,30 +1,33 @@
 {% extends "layout.html" %}
+
 {% block content %}
 
+<!-- template lorsqu'il n'y a pas de MST -->
 <script src='/static/LoHi.js' defer></script> 
 <script src='/static/dist_matrice_anim.js' defer></script> 
 
-
+<!-- bouttons pour enregistrer la matrice et l'arbre phylo  -->
 <div  id='stat_table'>
-<h3>Matrice de distances (fichiers LoHi)</h3>
-<input id="namef" name="text"  placeholder='nom du fichier'>
-<input style='width:100px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
-<input style='width:120px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining"  type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
+	<h3>Matrice de distances (fichiers LoHi)</h3>
+	<input id="namef" name="text"  placeholder='nom du fichier'>
+	<input style='width:100px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
+	<input style='width:120px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining"  type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
 </div>
 
 
+<!-- matrice de distances -->
 <div id="innerdiv">
-<p>
-{{ df | safe  }}
-</p>
+	<p>{{ df | safe  }}</p>
 </div>
+
 
 <div id='stat_table'>
 <h3>Minimum spanning tree</h3>
 </div>
 
+<!-- affichage d'une image de substitution -->
 <div id="innerdiv">
-<img rel="icon" type="image/png" src={{ f }} style="width:500px">
+	<img rel="icon" type="image/png" src={{ f }} style="width:500px">
 </div>
 
 

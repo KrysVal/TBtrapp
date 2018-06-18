@@ -1,43 +1,51 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
+
 <div style='float:left;margin-left:30px;margin-top:30px'>
-<h2>Fiche détaillée de l'analyse : {{a.sample}}</h2>
-<table class="customers" >
-	
-	
-  <tr><th>sample<td>{{a.nom}}</td>
-  <tr><th>cumm_nreads<td>{{a.cumm_nreads}}</td>
-  <tr><th>nreads_detail<td>{{a.nreads_detail}}</td>
-  <tr><th>trim_paired<td>{{a.trim_paired}}</td>
-  <tr><th>trim_single<td>{{a.trim_single}}</td>
-  <tr><th>trim_dropped<td>{{a.trim_dropped}}</td>
-  <tr><th>dropped (%)<td>{{a.dropped}}</td>
-  <tr><th>mapping_mode<td>{{a.mapping_mode}}</td>
-  <tr><th>mapping_paired<td>{{a.mapping_paired}}</td>
-  <tr><th>mapping_unpaired<td>{{a.mapping_unpaired}}</td>
-  <tr><th>mapped_pair<td>{{a.mapped_pair}}</td>
-  <tr><th>mapped_single<td>{{a.mapped_single}}</td>
-  <tr><th>mapped_total<td>{{a.mapped_total}}</td>
-  <tr><th>unmapped_total<td>{{a.unmapped_total}}</td>
-  <tr><th>mapped (%)<td>{{a.mapped}}</td>
-  <tr><th>unmapped (%)<td>{{a.unmapped}}</td>
-  <tr><th>ref_covered (%)<td>{{a.ref_covered}}</td>
-  <tr><th>DELMNP<td>{{a.DELMNP}}</td>
-  <tr><th>INSMNP<td>{{a.INSMNP}}</td>
-  <tr><th>DEL<td>{{a.DEL}}</td>
-  <tr><th>INS<td>{{a.INS}}</td>
-  <tr><th>SNP<td>{{a.SNP}}</td>
-  <tr><th>nVariants<td>{{a.nVariants}}</td>
-  </table>
-  </div>
-  
+
+	<!-- table représentant le contenu du fichier <xxx.resume.csv> -->
+	<h2>Fiche détaillée de l'analyse : {{a.sample}}</h2>
+		<table class="customers" >
+			  <tr><th>sample<td>{{a.nom}}</td>
+			  <tr><th>cumm_nreads<td>{{a.cumm_nreads}}</td>
+			  <tr><th>nreads_detail<td>{{a.nreads_detail}}</td>
+			  <tr><th>trim_paired<td>{{a.trim_paired}}</td>
+			  <tr><th>trim_single<td>{{a.trim_single}}</td>
+			  <tr><th>trim_dropped<td>{{a.trim_dropped}}</td>
+			  <tr><th>dropped (%)<td>{{a.dropped}}</td>
+			  <tr><th>mapping_mode<td>{{a.mapping_mode}}</td>
+			  <tr><th>mapping_paired<td>{{a.mapping_paired}}</td>
+			  <tr><th>mapping_unpaired<td>{{a.mapping_unpaired}}</td>
+			  <tr><th>mapped_pair<td>{{a.mapped_pair}}</td>
+			  <tr><th>mapped_single<td>{{a.mapped_single}}</td>
+			  <tr><th>mapped_total<td>{{a.mapped_total}}</td>
+			  <tr><th>unmapped_total<td>{{a.unmapped_total}}</td>
+			  <tr><th>mapped (%)<td>{{a.mapped}}</td>
+			  <tr><th>unmapped (%)<td>{{a.unmapped}}</td>
+			  <tr><th>ref_covered (%)<td>{{a.ref_covered}}</td>
+			  <tr><th>DELMNP<td>{{a.DELMNP}}</td>
+			  <tr><th>INSMNP<td>{{a.INSMNP}}</td>
+			  <tr><th>DEL<td>{{a.DEL}}</td>
+			  <tr><th>INS<td>{{a.INS}}</td>
+			  <tr><th>SNP<td>{{a.SNP}}</td>
+			  <tr><th>nVariants<td>{{a.nVariants}}</td>
+		</table>
+
+</div>
+
+
+<!-- liens vers les histogrammes de mélanges quand disponible -->  
 <div style='margin-top:60px'>
+	<p>
+		<a style='margin-left:20px' href="" onclick="window.open('{{a.histo}}', 'popup','resizable=yes,width=1000,height=800')" title="Histogramme de la distribution des fréquences des variants du fichier <xxxfast.PVD.raw.csv>"><img rel="icon " type="image/png" src="/static/images/bar-chart.png" style="height:30px" > "raw"</a>
+		<a style='margin-left:10px' href="" onclick="window.open('{{a.histo_clean}}', 'popup','resizable=yes,width=1000,height=800')" title="Histogramme de la distribution des fréquences des variants du fichier <xxxfast.clean.PVD.raw.csv>"><img rel="icon " type="image/png" src="/static/images/bar-chart.png" style="height:30px" > "clean"</a>
+	</p>
 	  
-	  <p ><a style='margin-left:20px' href="" onclick="window.open('{{a.histo}}', 'popup','resizable=yes,width=1000,height=800')" title="voir l'histogramme des mélanges sur les variants raw"><img rel="icon " type="image/png" src="/static/images/bar-chart.png" style="height:30px" > "raw"</a>
-	  <a style='margin-left:10px' href="" onclick="window.open('{{a.histo_clean}}', 'popup','resizable=yes,width=1000,height=800')" title="voir l'histogramme des mélanges sur les variants raw clean"><img rel="icon " type="image/png" src="/static/images/bar-chart.png" style="height:30px" > "clean"</a></p>
-	  
-	  </div>
-  </div>
+</div>
+ 
+ 
+  
 {% endblock %}
 

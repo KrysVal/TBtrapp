@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
-{% block content %}
 
+
+
+{% block content %}
 <script src='/static/liste.js' defer></script> 
 <script src='/static/Hi.js' defer></script>
 
@@ -8,84 +10,80 @@
 <div id='globale' style='padding-top:20px;padding-left:35px;padding-right:35px'>
 
 
-
-
-<div id='contenu' >
-
-<div id='selection'>
-
-<div id='add_sel'>
-<input id="cluster_name" name="text"  placeholder='nom du cluster...' oninput="add_cluster();"> <button id="add_b" class="sel_b"  title="Ajouter un cluster de transmissions" disabled><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="Supprimer le cluster de transmissions sélectionné " disabled><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
-</div>
-
-
-<select id='cluster_sel' style='width:100%;height:auto;background-color:white' multiple>
-{% for r in sel %}
-<option class='option' value={{r.value}}>{{ r.name }}</option>
-{% endfor %}
-
-</select>
-
-
-
-
-</div>
-
-
-<!-- box de renseignement sur ce qui est affiché -->
-<div  id='stat_table' >
-<p><h3><span id='tabletot' style='color:#14485f;font-weight:bold'></span> analyses au total</h3></p>
-<p><h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyse(s) affichée(s) </h3></p>
-<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="Afficher uniquement les analyses sélectionnées"> </input></h3></p>
-</div>
-
-
-<!-- partie de trie de la BD et de recherche -->
-<div id='innerdiv'>
-<p>
-<form method="post" action={{url_for('trier_list2')}}>
-<select id="trie" name='select_val'onchange=trier()>
+	<div id='contenu' >
 		
-		  <option value='trier'  disabled selected>trier par...</option>
-		  <option value='id'>id</option>
-          <option value='sample'>sample</option>
-		  <option value='SNP_hi'>SNP</option>
-		  <option value='nVariants_hi'>nVariants</option>
+		
+		<!-- champ permettant d'enregistrer des clusters de transmissions -->
+		<div id='selection'>
+			<div id='add_sel'>
+				<input id="cluster_name" name="text"  placeholder='nom du cluster...' oninput="add_cluster();"> <button id="add_b" class="sel_b"  title="Ajouter un cluster de transmissions" disabled><img src='/static/images/add-selection.png' style='width:20px'></button><button id="del_sel"  title="Supprimer le cluster de transmissions sélectionné " disabled><img src='/static/images/rubbish-bin.png' style='width:20px'></button>
+			</div>
+			<select id='cluster_sel' style='width:100%;height:auto;background-color:white' multiple>
+				{% for r in sel %}
+				<option class='option' value={{r.value}}>{{ r.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
 
-</select>
-<input disabled id="boutton_trier" type="submit" value="trier" title="Trier le tableau" method='post'/>
-<input type="text" placeholder='Search for...' id='myInput' title="Rechercher une analyse dans la base de données" onkeyup=search()  />
-</form>
-</p>
+
+		<!-- box de renseignement sur ce qui est affiché -->
+		<div  id='stat_table' >
+			<p><h3><span id='tabletot' style='color:#14485f;font-weight:bold'></span> analyses au total</h3></p>
+			<p><h3><span id='tablesize' style='color:#14485f;font-weight:bold'></span> analyse(s) affichée(s) </h3></p>
+			<p><h3><span id='selected' style='color:#14485f;font-weight:bold'></span> analyse(s) selectionnée(s) <input style=";margin-left:20px" type='checkbox' id="sel" title="Afficher uniquement les analyses sélectionnées"> </input></h3></p>
+		</div>
 
 
-<!-- tableau d'affichage des analyses de la BD -->
-<table class='customers'>
-  <thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
+		<!-- champs de trie et de recherche dans la base de données -->
+		<div id='innerdiv'>
+		<p>
+			<form method="post" action={{url_for('trier_list2')}}>
+			<select id="trie" name='select_val'onchange=trier()>
+					
+					  <option value='trier'  disabled selected>trier par...</option>
+					  <option value='id'>id</option>
+					  <option value='sample'>sample</option>
+					  <option value='SNP_hi'>SNP</option>
+					  <option value='nVariants_hi'>nVariants</option>
+
+			</select>
+			<input disabled id="boutton_trier" type="submit" value="trier" title="Trier le tableau" method='post'/>
+			<input type="text" placeholder='Search for...' id='myInput' title="Rechercher une analyse dans la base de données" onkeyup=search()  />
+			</form>
+		</p>
+
+
+			<!-- tableau d'affichage des analyses de la BD -->
+			<table class='customers'>
+				<thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
   
-  <tbody>
-		{% for a in analyses %}
-		<tr>
-		<td>{{a.id}}</td>
-		<td>{{a.nom}}</td>
-		<td><a href="{{url_for('analyse_view', val=a.id)}}">{{a.sample}}</a></td>
-		<td>{{a.DEL_hi}}</td>
-		<td>{{a.INS_hi}}</td>
-		<td style='font-weight:bold'>{{a.SNP_hi}}</td>
-		<td>{{a.nVariants_hi}}</td>
-		<td><input  type="checkbox" class="check" ></td>
-        </tr>
-		{% endfor %}
-  </tbody>
-</table>
+				<tbody>
+					{% for a in analyses %}
+					<tr>
+					<td>{{a.id}}</td>
+					<td>{{a.nom}}</td>
+					<td><a href="{{url_for('analyse_view', val=a.id)}}">{{a.sample}}</a></td>
+					<td>{{a.DEL_hi}}</td>
+					<td>{{a.INS_hi}}</td>
+					<td style='font-weight:bold'>{{a.SNP_hi}}</td>
+					<td>{{a.nVariants_hi}}</td>
+					<td><input  type="checkbox" class="check" ></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		
+		
+		<!-- boutton permettant de remonter en haut de page -->
+		<button id="haut" ><img src='/static/images/arrow-up.png' style='height:22px'></button>
+		<!-- boutton permettant de construire la matrice de distances avec les SNP des fichiers Hi_filter -->
+		<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
+		<!-- boutton permettant de construire les séquences artificielles des SNP des fichiers Hi_filter -->
+		<button id="align_file" class='bou' title="Construire un fichier contenant les séquences artificielles des SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick="alignement_SNPs()" disabled  >séquences SNPs</button>
+	
+	</div>
 </div>
-<!-- boutton permettant de remonter en haut de page -->
-<button id="haut" ><img src='/static/images/arrow-up.png' style='height:22px'></button>
-<!-- boutton permettant de construire la matrice de distances avec les SNP des fichiers Hi_filter -->
-<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
 
 
-<button id="align_file" class='bou' title="Construire un fichier contenant les séquences artificielles des SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick="alignement_SNPs()" disabled  >séquences SNPs</button>
-</div>
-</div>
 {% endblock %}
