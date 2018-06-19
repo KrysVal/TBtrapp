@@ -24,17 +24,6 @@ HTMLElement.prototype.pseudoStyle = function(element,prop,value){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* activer/desactiver le bouton aligner */
 let xy = document.querySelectorAll('input[type=checkbox]')
 
@@ -70,11 +59,7 @@ function  enableB(i)
 
 
 
-
-
-
-
-/* fonction qui renvoie les identifiants des cases cochées  */
+/* fonction qui renvoie les identifiants des analyses sélectionnées */
 function check_case()
 
 {
@@ -97,7 +82,7 @@ for (xi of x)
 
 
 
-/* fonction qui renvoie les noms des cases cochées  */
+/* fonction qui renvoie les noms des des analyses sélectionnées */
 function check_name()
 
 {
@@ -119,7 +104,7 @@ for (xi of x)
 
 
 
-/* definit les opérations côté serveur du bouton aligner */
+/* definit les opérations côté serveur du bouton de génération des matrices de distances */
 function aligner_hi()
 
 {
@@ -163,36 +148,19 @@ fetch("http://localhost:5000/Analyses/Align", {
 
 
 
-/* fonction qui permet d'enregistrer le fichier de SNPs */
+/* fonction qui permet d'enregistrer le fichier de séquences artificielles des SNPs */
 function downloadAl(t) {
     
-    /*var tree = $('#my-data').data();*/
-	
-  
-    // Download link
     downloadLink = document.createElement("a");
     downloadLink.classList.add("downl");
-
-    // File name
-    downloadLink.download = "sequences_artificielles_SNPs_LoHi.fa";
-
-    // Create a link to the file
-    downloadLink.href = t;
-	
+	downloadLink.download = "sequences_artificielles_SNPs_LoHi.fa";
+	downloadLink.href = t;
 	downloadLink.type = 'text/fa';
-    // Hide download link
     downloadLink.style.display = "none";
-
-    // Add the link to DOM
-    document.body.appendChild(downloadLink);
-
-    // Click download link
-    downloadLink.click();
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
     
-    
-    
-   
-}   
+    }   
     
 
 /* définit l'enchainement des requêtes à effectuer en vue de créer un fichier de séquences artificielles de SNPs  */
@@ -249,10 +217,6 @@ fetch(t, {
 
 
 
-		
-
-
-
 /* definit les opérations côté serveur du bouton créer MST */
 function LoHi()
 
@@ -297,12 +261,6 @@ fetch("http://localhost:5000/Analyses/Align/matrix_hi", {
 
 
 
-
-
-
-
-
-
 /* facilite la selection*/
 
 $(document).ready(
@@ -317,8 +275,6 @@ $(document).ready(
 
 
 /* surligner la selection */ 
-
-
 $(document).ready(
 	function() 
 		{ $('tbody tr').click(function(event) 
@@ -340,20 +296,6 @@ $(document).ready(
 							
 						});
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
 $(document).ready(
 	function() 				
 				
@@ -369,10 +311,11 @@ $(document).ready(
 
 
 
-/* afficher les échantillons sélectionnés seulement */
 
+
+
+/* activer / désactiver la case à cocher pour afficher que les analyses sélectionnées */
 $('#sel').prop('disabled','true');
-
 $(document).ready(
 	function() 
 		{ $('body tr').click(function(event) 
@@ -411,7 +354,7 @@ $(document).ready(
 
 
 
-
+/* comportement lorsque l'on clique sur la case à cocher activé au dessus */
 $(document).ready(
 	function() 
 		{ $('#sel').click(function(event) 
@@ -420,13 +363,7 @@ $(document).ready(
 				
 				{
 				
-				/*let c = $('.check').closest('tr').find('[type=checkbox]').prop('checked');
-				
-					if (c === true)
-					
-					{*/
-					
-					$('.check:not(:checked)').closest('tr').css('display',"none");
+				$('.check:not(:checked)').closest('tr').css('display',"none");
 					}
 					
 				
@@ -448,11 +385,6 @@ $(document).ready(
 
 
 
-				
-			
-				
-
-
 /* efface la séléction en cliquant n'importe ou sur la page */
 $(document).ready(
 		function()
@@ -461,12 +393,8 @@ $(document).ready(
 				{ 
 				
 				$(this).find('[type=checkbox]').prop('checked',false);
-				
-				
 				$(this).find('tr:not(.cache)').css('background-color','');
-				/*$(this).find('tr').find('td').css('color','');
-				$(this).find('tr').find('td').find('a').css('color','');
-				$(this).find('.check').removeAttr("disabled");*/
+				
 				
 				enableB(document.querySelector('input[type=checkbox]'));
 				$('table.customers tbody tr').css('display',"");
@@ -504,12 +432,7 @@ $(document).ready(
 							event.stopPropagation();})
 				
 				
-							
-							
-				
-					
-							
-						})
+				})
  
 
  
@@ -602,42 +525,30 @@ function exportTableToCSV() {
         csv.push(row.join(","));        
     }
 
-    // Download CSV file
+    
     downloadCSV(csv.join("\n"), filename);
 }
 
 
 function downloadCSV(csv, filename) {
+    
+    
+    
     var csvFile;
     var downloadLink;
-	
-	
-    // CSV file
-    csvFile = new Blob([csv], {type: "text/csv"});
-
-    // Download link
+	csvFile = new Blob([csv], {type: "text/csv"});
     downloadLink = document.createElement("a");
-
-    // File name
     downloadLink.download = filename;
-
-    // Create a link to the file
     downloadLink.href = window.URL.createObjectURL(csvFile);
-
-    // Hide download link
     downloadLink.style.display = "none";
-
-    // Add the link to DOM
     document.body.appendChild(downloadLink);
-
-    // Click download link
     downloadLink.click();
 }
 
 
 
 
-/* bouton selectall */
+/* bouton permettant la sélection de toutes les analyses affichées */
 function all_select()
 {
 
@@ -646,11 +557,7 @@ $('.check:visible:not(:checked)').trigger('click');
 	}
 	
 
-
-
-
 /* informations haut de page*/
-			
 $(document).ready(
 	function() 
 		{ 	let t = document.getElementById("tablesize");
@@ -746,9 +653,6 @@ $("table.dist td:nth-child("+index+"), table.dist th:nth-child("+index+")").show
 
 
 /* fonction permettant la suppression d'un cluster de transmission */
- 
- 
- 
 $(document).ready(
 		function()
 			{ 
@@ -783,11 +687,9 @@ fetch("/Analyses/Align/del_selection", {
 	})})
 
 
-/* fonction permettant l'ajout d'un cluster de transmission */
- 
- 
- 
 
+
+/* activation/désactivation du boutton d'ajout de cluster de transmissions */
 function add_cluster()
  {
 	
@@ -806,10 +708,30 @@ function add_cluster()
 	 }
 
 
-/* fonction permettant l'ajout d'un cluster de transmission */
- 
- 
- 
+$(document).ready(
+	function() 
+		{ $('body tr').click(function(event)
+			{
+			if ($("input#cluster_name").val().length>5 && $('input.check:checked').length > 1 )
+	
+		{
+		$('button#add_b').removeAttr("disabled");
+		}
+		
+	else
+		
+		{
+		$('button#add_b').prop('disabled','true');
+		}	
+				
+				})
+			 })
+			
+
+
+
+
+/* fonction permettant l'ajout d'un cluster de transmissions */
 $(document).ready(
 		function()
 			{ 
@@ -841,7 +763,8 @@ $(document).ready(
 		{
 			return response.json().then((data) => {console.log(data);
 			alert(data['error']);
-			window.location.href="http://localhost:5000/Analyses/Align?val=SNP_hi";})}
+			$('body').removeClass('wait');
+			})}
 		
 		else 
 		
@@ -852,25 +775,3 @@ $(document).ready(
 	
 	
 	})})
-	
-	
-	
-$(document).ready(
-	function() 
-		{ $('body tr').click(function(event)
-			{
-			if ($("input#cluster_name").val().length>5 && $('input.check:checked').length > 1 )
-	
-		{
-		$('button#add_b').removeAttr("disabled");
-		}
-		
-	else
-		
-		{
-		$('button#add_b').prop('disabled','true');
-		}	
-				
-				})
-			 })
-			

@@ -1,15 +1,5 @@
-// html new_analyse
+/* activation/désactivation du boutton de trie de la base de données */
 
-
-
-/*let b = document.getElementById('add_boutton');
-b.setAttribute('disabled',true);
-let s = document.getElementsByTagName('select')[0];
-*/
-
-
-
-/* boutton de trie */
 function trier()
 {
 	let y = document.querySelector('select#trie');
@@ -23,6 +13,9 @@ function trier()
 	
 	}
 	
+	
+	
+/*	
 function hide_aligner()
 {
 	let y = document.getElementsByTagName('select')[0];
@@ -36,20 +29,20 @@ function hide_aligner()
 	
 	}	
 	
-	
+	*/
 	
 
-/* permet la recherche dans la base de données */
+/* focntion associée à une recherche dans la base de données */
 function search()
 {
-	    // Declare variables
+	    
     var input, filter, tr, a, i;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
     
     tr = document.getElementsByTagName('tr');
 
-    // Loop through all list items, and hide those who don't match the search query
+    
     for (i = 1; i < tr.length; i++) {
         a = tr[i].getElementsByTagName("td")[2];
         if (a.innerHTML.toUpperCase().indexOf(filter) > -1 || tr[i].children[7].children[0].checked )
@@ -70,51 +63,7 @@ function search()
 }
 	
 
-
-
-
-/*
-function verif_champs() {
-//D'abord tester si l'utilsateur n'a pas saisi la chaine vide
-// après on change en number
-	let analyse = document.getElementsByTagName("input")[0].value;
-	
-	
-
-	if(analyse !== "" &&  analyse.length >= 5 )
-	 {
-	 	console.log("true");
-		return true;
-	}
-	else {
-		console.log("false");
-		return false;
-	}}
-
-function button_activate() {
-	let b= document.getElementById('add_boutton');
-	
-
-	let resultat = verif_champs();
-	if(resultat ) {
-		b.removeAttribute("disabled","")
-	}
-	else 
-	{
-		b.setAttribute("disabled","")
-		}
-}
-
-let d = document.getElementsByTagName("input");
-
-for (di of d) {
-	di.addEventListener('input', button_activate);
-}
-
-**/
-
-
-/* suppression d'une instance de la base de données */ 
+/* suppression d'une analyse de la base de données */ 
 function Delete(e)
 
 {
@@ -140,7 +89,7 @@ function Delete(e)
 	
 	
 	
-/* animation du bouton retour en haut */
+/* animation du bouton retour en haut de page */
 $(function(){
     $("#haut").click(function(){
         $("html, body").animate({scrollTop: 0},"slow");
@@ -168,7 +117,7 @@ function ScrollEv() {
 
 
 
-
+/* récuperation de la taille de la base de données */
 $(document).ready(
 	function() 
 		{ let tot = document.getElementById("tabletot");

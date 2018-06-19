@@ -10,8 +10,8 @@
 <div  id='stat_table'>
 	<h3>Matrice de distances (fichiers LoHi)</h3>
 	<input id="namef" name="text"  placeholder='nom du fichier'>
-	<input style='width:50px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
-	<input style='width:50px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining" type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
+	<input style='width:100px' title="Enregistrer la matrice de distances au format CSV" type="submit" value="enregistrer" onclick="exportTableToCSV()" >
+	<input style='width:60px' title="Enregistrer au format Newick l'arbre phylogénétique associé construit avec la méthode du neighboor joining" type="submit" value="arbre" onclick='downloadNewick({{tree|tojson}})' >
 </div>
 
 
@@ -24,7 +24,7 @@
 <!-- boutton pour enregistrer le png du MST -->
 <div id='stat_table'>
 	<h3>Minimum spanning tree</h3>
-	<input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:50px' title="Enregistrer le minimm spanning tree au format PNG" type="submit" value="exporter" onclick='downloadMST({{ f|tojson }})' >
+	<input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:100px' title="Enregistrer le minimm spanning tree au format PNG" type="submit" value="exporter" onclick='downloadMST({{ f|tojson }})' >
 </div>
  
 <!-- affichage du MST --> 

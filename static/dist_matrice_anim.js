@@ -1,4 +1,8 @@
 /* animation de la matrice de distance */
+
+
+
+/* on associe a chaque cellule de la matrice de distances une fonction pour les événements mouseover mouseleave*/
 let m = document.querySelectorAll('table.dist tbody td')
 
 for (let mi of m)
@@ -7,22 +11,20 @@ for (let mi of m)
 	mi.addEventListener('mouseleave', function() { leaveC(mi);});}
 
 
+
+
 function leaveC(x)
 {
 
 row=x.parentElement.children[0];
-
 row.style.backgroundColor='rgb(65,65,65)';
 row.style.color='white';
-/*row.style.fontWeight='normal';
-row.style.letterSpacing='1px';*/
 
 i=x.cellIndex;
 col=x.parentElement.parentElement.parentElement.children[0].children[0].children[i];
 col.style.backgroundColor='rgb(65,65,65)';
 col.style.color='white';
-/*col.style.fontWeight='normal';
-col.style.letterSpacing='1px';*/
+
 
 	}
 	
@@ -33,18 +35,17 @@ function overC(x)
 
 x.parentElement.children[0].style.backgroundColor='lightgrey';
 x.parentElement.children[0].style.color='black';
-/*x.parentElement.children[0].style.fontWeight='bold';
-x.parentElement.children[0].style.letterSpacing='1px';*/
 
 i=x.cellIndex;
 col=x.parentElement.parentElement.parentElement.children[0].children[0].children[i];
 col.style.backgroundColor='lightgrey';
 col.style.color='black';
-/*col.style.fontWeight='bold';
-col.style.letterSpacing='1px';*/
+
 }	
 
 
+
+/* coloriage des cellules selon leur valeur */
 let ca = document.querySelectorAll('table.dist td');
 for (c of ca) {
 			
@@ -70,6 +71,8 @@ for (c of ca) {
 			else if ((20<Number(c.textContent)) && (Number(c.textContent)<=30)) {c.style.backgroundColor="rgb(255,210,117)"}
 			}
 			
+			
+			/* la diagonale */
 			else if (col === li)
 			
 			{
@@ -78,8 +81,10 @@ for (c of ca) {
 			}
 
 
-let l = document.querySelectorAll('table.dist tbody tr')
 
+
+/* encadrage des souches isolées par leur distances aux autres en rouge  */
+let l = document.querySelectorAll('table.dist tbody tr')
 for (let li of l) 
 
 	{ 	let lij = li.querySelectorAll('td'); 

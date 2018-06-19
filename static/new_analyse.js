@@ -1,3 +1,4 @@
+/* fonction qui pemet de mettre à jour la base de données */
 function new_A()
 
 {
