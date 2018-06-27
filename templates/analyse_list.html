@@ -51,7 +51,7 @@
 			<td class="toolbox">
 			<!-- permet la suppression de chaque analyse -->	  
 			<a  onclick=Delete(event)>
-			<button class="suppr" >X</button></td></a>
+			<button title="Supprimer l'analyse" class="suppr" >X</button></td></a>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -63,6 +63,8 @@
 
 	<!-- boutton permettant de remonter en haut de page -->
 	<button id="haut" ><img src='/static/images/arrow-up.png' style='height:22px' ></button>
+	
+	<img title="INFO : les mesures de polymorphisme (SNP, DEL, INS et nVariants) ont été calculées par alignement avec le génome de référence H37Rv. Elles sont basées sur les fichiers de variants <xxx.clean.PVD.Hi_filter.csv> produits par le pipeline DIANA. " src='/static/images/info.png' style='height:22px;position:absolute;top:475px;left:360px;'>
 
 
 </div>

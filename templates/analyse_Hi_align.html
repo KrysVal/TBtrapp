@@ -55,7 +55,7 @@
 
 			<!-- tableau d'affichage des analyses de la BD -->
 			<table class='customers'>
-				<thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
+				<thead ><tr><th>id</th><th>échantillon</th><th >analyse <button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='height:20px'></th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th></tr></thead>
   
 				<tbody>
 					{% for a in analyses %}
@@ -67,7 +67,7 @@
 					<td>{{a.INS_hi}}</td>
 					<td style='font-weight:bold'>{{a.SNP_hi}}</td>
 					<td>{{a.nVariants_hi}}</td>
-					<td><input  type="checkbox" class="check" ></td>
+					<td style='visibility:hidden;border:0;'><input  type="checkbox"  class="check" > </td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -80,8 +80,11 @@
 		<!-- boutton permettant de construire la matrice de distances avec les SNP des fichiers Hi_filter -->
 		<button id="aligner" class='bou' title="Construire la matrice de distances avec les SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick=aligner_hi() disabled  >matrice</button>
 		<!-- boutton permettant de construire les séquences artificielles des SNP des fichiers Hi_filter -->
-		<button id="align_file" class='bou' title="Construire un fichier contenant les séquences artificielles des SNPs des fichiers <xxxclean.PVD.Hi_filter.csv> des analyses sélectionnées" onclick="alignement_SNPs()" disabled  >séquences SNPs</button>
-	
+		<button id="align_file" class='bou' title="Construire un fichier contenant les séquences artificielles des SNPs des fichiers <xxxLoHi.csv> des analyses sélectionnées" onclick="alignement_SNPs()" disabled  >séquences SNPs</button>
+		<!-- boutton permettant de trouver des analyses dont la distance à H37RV est proche de l'analyse sélectionnée -->
+		</button><button id="network" onclick=dist_ref_cluster()  title="Trouver les analyses dont la distance SNPs à H37Rv est égale à celle de l'analyse sélectionnée +/- 20 SNPs" disabled >+/-20 SNPs</button> <!-- <img src='/static/images/network.png' style='height:30px'> -->
+		
+		<img title="INFO : les mesures de polymorphisme (SNP, DEL, INS et nVariants) ont été calculées par alignement avec le génome de référence H37Rv. Elles sont basées sur les fichiers de variants <xxx.clean.PVD.Hi_filter.csv> produits par le pipeline DIANA. " src='/static/images/info.png' style='height:22px;position:absolute;top:565px;left:400px;'>
 	</div>
 </div>
 

@@ -17,6 +17,9 @@
 
 <!-- matrice de distances -->
 <div id='innerdiv'>
+	
+	<img src="/static/images/keyboard.png" style="margin:50px;height:110px;margin-left:200px" title="Vous pouvez parcourir la matrice de distances avec les touches directionnelles de votre clavier">
+<img src="/static/images/rectangle.png" style="margin:50px;height:110px;margin-left:200px" title="Analyse(s) distante(s) de plus de 30 SNPs des autres analyses de votre sélection">
 	<p>{{ df | safe  }}</p>
 </div>
 
@@ -25,6 +28,8 @@
 <div id='stat_table'>
 	<h3>Minimum spanning tree</h3>
 	<input id="namemst" name="text"  placeholder='nom du fichier'> <input style='width:100px' title="Enregistrer le minimm spanning tree au format PNG" type="submit" value="exporter" onclick='downloadMST({{ f|tojson }})' >
+
+
 </div>
  
 <!-- affichage du MST --> 

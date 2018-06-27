@@ -22,7 +22,7 @@
 
 		<!-- tableau d'affichage des analyses sélectionnées pour construire la matrice de distances -->
 			<table class='customers'>
-			<thead><tr><th>id</th><th>échantillon</th><th>analyse</th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th><th ><button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='width:20px'></button></th></tr></thead>
+			<thead><tr><th>id</th><th>échantillon</th><th>analyse <button id="sel" onclick=all_select()  title="Sélectionner toutes les analyses affichées"><img src='/static/images/select.png' style='height:20px'></th><th>DEL</th><th>INS</th><th>SNP</th><th>nVariants</th></tr></thead>
 			<tbody>
 				{% for a in analyses %}
 				<tr>
@@ -33,15 +33,15 @@
 				<td>{{a.INS_hi}}</td>
 				<td style='font-weight:bold'>{{a.SNP_hi}}</td>
 				<td>{{a.nVariants_hi}}</td>
-				<td><input  type="checkbox" class="check" ></td>
-				<td><button class='hidden' title="Masquer l'analyse dans la matrice de distances"><img src="/static/images/no-eye.png" style='width:20px'></button></td>
+				<td style="border:0;"><button class='hidden' title="Masquer l'analyse dans la matrice de distances"><img src="/static/images/no-eye.png" style='width:20px;'></button></td>
+				<td style='visibility:hidden;border:0;width:0'><input  type="checkbox" class="check" ></td>
 				</tr>
 				{% endfor %}
 			</tbody>
 			</table>
 		</div>
 
-
+		
 		
 		<!-- matrice de distances -->
 		<div  id='stat_table'>
@@ -52,12 +52,15 @@
 
 		
 		<div id="innerdiv">
+			<img src="/static/images/keyboard.png" style="margin:50px;height:110px;margin-left:200px" title="Vous pouvez parcourir la matrice de distances avec les touches directionnelles de votre clavier">
+			<img src="/static/images/rectangle.png" style="margin:50px;height:110px;margin-left:200px" title="Analyse(s) distante(s) de plus de 30 SNPs des autres analyses de votre sélection">
 			<p>
 			{{ df | safe }}
 			</p>
 
 			<!-- bouton pour créer un MST -->    
 			<button id="lohi" class='bou'  title="Exécution du script PanalyseTransversale.pl sur les analyses sélectionnées, calcul de la matrice de distances (en SNPs) des fichiers <xxx.LoHi.csv> créés et construction du MST correspondant" onclick="LoHi()" disabled >créer MST</button>
+			<button id="network" disabled  style="visibility:hidden"></button>
 
 		</div>
 

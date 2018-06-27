@@ -24,15 +24,15 @@ HTMLElement.prototype.pseudoStyle = function(element,prop,value){
 
 
 
-/* activer/desactiver le bouton aligner */
-let xy = document.querySelectorAll('input[type=checkbox]')
+/* activer/desactiver les boutons  */
+let xy = document.querySelectorAll('input[type=checkbox].check')
 
 for (let i of xy)
 {i.addEventListener('change', function(){enableB(i);});}
 
 function  enableB(i)
 {
-	var j = document.querySelectorAll('input[type=checkbox]');
+	var j = document.querySelectorAll('input[type=checkbox].check');
 	var u=0;
 	
 	for (let ji of j)
@@ -41,20 +41,37 @@ function  enableB(i)
 			}};
 			
 	var bou = document.getElementsByClassName("bou");
-			
-	if (u >= 2)
+	let net = document.getElementById("network");
+	
+	if (u === 1)
+	
+	{
+		
+		net.removeAttribute('disabled',"");
+		for (let b of bou){
+		b.setAttribute('disabled',"");
+	
+	}}
+		
+	else if (u >= 2)
 		
 		
 		{
+			net.setAttribute('disabled',"");
 			for (let b of bou){
 			b.removeAttribute('disabled',"");
 			}}
 	else {
+		net.setAttribute('disabled',"");
 		for (let b of bou){
 		b.setAttribute('disabled',"");
 		}}
 	
 		} 
+		
+		
+		
+ 
 	
 
 
@@ -129,8 +146,16 @@ document.getElementById('globale').style.paddingLeft = "0px";
 $('#globale').append(str);
 document.querySelector(".marque [data-text]").pseudoStyle("before","animation-duration",x_2);
 
+let div_p = document.getElementById('contenu');
+div_p.className += " "+"lds-default";
 
-$('#contenu').addClass('loader');
+
+for (var i =0 ; i < 12; ++i)
+{
+div = document.createElement('div');
+div_p.appendChild(div);
+}
+
 $('body').addClass('wait');
 
 
@@ -189,7 +214,17 @@ $('#globale').append(str);
 document.querySelector(".marque [data-text]").pseudoStyle("before","animation-duration",x_2);
 
 
-$('#contenu').addClass('loader');
+let div_p = document.getElementById('contenu');
+div_p.className += " "+"lds-default";
+
+
+for (var i =0 ; i < 12; ++i)
+{
+div = document.createElement('div');
+div_p.appendChild(div);
+}
+
+
 $('body').addClass('wait');
 
 
@@ -244,7 +279,17 @@ $('#globale').append(str);
 document.querySelector(".marque [data-text]").pseudoStyle("before","animation-duration",x_2);
 
 
-$('#contenu').addClass('loader');
+let div_p = document.getElementById('contenu');
+div_p.className += " "+"lds-default";
+
+
+for (var i =0 ; i < 12; ++i)
+{
+div = document.createElement('div');
+div_p.appendChild(div);
+}
+
+
 $('body').addClass('wait');
 
 
@@ -775,3 +820,37 @@ $(document).ready(
 	
 	
 	})})
+	
+	
+	
+function dist_ref_cluster()
+{
+
+
+
+
+let nb_SNP = $('.check:checked').closest('tr').children()[5].innerHTML;
+document.getElementById("myInput").value = "";
+document.getElementsByTagName('body')[0].click();
+
+
+let inf = Number(nb_SNP) - 20;
+let sup = Number(nb_SNP) + 20;
+
+
+
+
+let rows = document.querySelectorAll(" table tbody tr")	;
+
+for (let ri of rows)
+{
+	
+if ( Number(inf) <= Number(ri.children[5].innerHTML) && Number(ri.children[5].innerHTML) <= Number(sup) && ri.children[7].children[0].checked === false)
+	
+	{ri.click();}
+
+
+	
+}	
+document.querySelector("input#sel").click();	
+	}

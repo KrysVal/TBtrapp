@@ -1019,13 +1019,27 @@ def update():
 					return render_template('analyse_list.html', val='id')
 
 				else:
+					
 					l=len(warning)
 					message='La base de données contient déjà les '+str(l)+' analyses suivantes : \n'
 
 					for x in warning:
+						
 						message=message+str(x)+'\n'
-						print(x)
-					message+='\n\nCes analyses sont donc supprimées du répertoire temporaire de la base de données.\nAppuyez de nouveau sur le bouton de mise à jour pour ajouter les nouvelles analyses.'
-
+						nom=x.replace('\t','')
+						d='find /home/lpe/TBtrapp/static/NewRUN/ -type d -name "*%s" -exec rm -r {} \;'%nom
+						#print(d)
+						#e="sed -i '/%s/d' analyse_test.csv"%x
+						
+						os.system(d)
+						#os.system(e)
+						
+					message+='\n\nCes analyses ne sont donc pas ajoutées à la base de données.\nAppuyez de nouveau sur le bouton de MAJ pour ajouter les autres analyses.'
+					
+					
+					
+					
+					
+					os.system('rm analyse_test.csv')
 					e=erreur(400,message)
 					return e

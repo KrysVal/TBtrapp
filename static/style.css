@@ -2,10 +2,10 @@ body {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   font-size:14px;
   margin:0px 0px; /*.5em 1em;*/
-overflow:auto;
+/*overflow:auto;*/
   letter-spacing:1px;
   width:100%;
-  min-height:1000px;
+  min-height:950px ;
   
   
 }
@@ -25,7 +25,7 @@ cursor:wait !important;
 div#acceuil
 {
 background-color: lightgrey;
-border-radius:5px;
+border-radius:1px;
 border: 0.5px solid grey;
 width:950px;
 height:250px;
@@ -37,8 +37,8 @@ margin-top:40px;
 div#stat_table
 {
 background-color: lightgrey;
-border-radius:5px;
-border: 0.5px solid grey;
+border-radius:1px;
+border: 1px solid darkgrey;
 width:1000px;
 text-align:center;
 
@@ -82,8 +82,8 @@ margin-top:55px;
 
 border:2px solid grey;
 
-border-radius:10px;
-transition: all 0.6s;
+border-radius:1px;
+transition: all 0.4s;
 
 }
 
@@ -136,7 +136,7 @@ footer {
   height:120px;
 
 margin-top:100px;
-margin-bottom:100px;
+
   
   
     clear:both;
@@ -167,28 +167,31 @@ background-color: #14485f;
 border: none;
     color: white;
     font-weight:bold;
-	margin-top:5px;	
-	padding:5px 10px;
+	
+	padding:7px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius:3px;
-    transition: all 0.6s;
+    border-radius:1px;
+    transition: all 0.4s;
+   
 }
 
 button:hover, input[type=submit]:hover
 {
-background-color: lightgray;
+background-color: darkgrey;
 
 cursor: pointer;
+color: white;
 
 }
 
 button:disabled, input[type=submit]:disabled{
   
-  background-color: #cccccc;
-  color: #666666;
+  background-color: darkgrey;
+  color: white;
   cursor:auto;
+  
 }
 
 /*** liste déroulante ****/
@@ -196,8 +199,9 @@ button:disabled, input[type=submit]:disabled{
 select {
 background-color: lightgray;
 border: none;
-border-radius: 3px;
+border-radius: 1px;
 padding:5px 10px;
+height:35px;
 }
 
 
@@ -265,7 +269,7 @@ font-weight:bold!important;
 .customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     width:50% ;
-    
+    margin-top:30px;
     border-collapse:collapse;
     
 }
@@ -327,7 +331,7 @@ width:50px;}
     height:35px;
     text-align:center;
     vertical-align:middle;
-    border-radius:2px;
+    border-radius:1px;
     
 }
 .nav a:focus,
@@ -419,7 +423,7 @@ background: black;
 
 input
 {
-border-radius:3px;
+border-radius:1px;
 background-color: lightgray;
 border:0px;
 margin-top:5px;
@@ -428,7 +432,7 @@ transition: all 0.6s;
 
 #myInput {
   margin-left:100px;
-  border-radius: 5px;
+  border-radius: 1px;
 	padding:5px 10px 5px 35px;
 	background-image: url('images/magnifier-tool.png');
 	 background-size: 15px ;
@@ -593,16 +597,35 @@ opacity:0.8;
 #aligner
 {
 position:absolute;
-right:310px;
+right:360px;
 top:480px;
+
 }
 
 #align_file
 {
 position:absolute;
-right:400px;
+right:450px;
 top:480px;
+
 }
+
+button#sel
+{
+padding:5px;
+margin-bottom:2px;
+margin-left:30px;
+border:1px solid lightgrey;
+}
+
+button#network
+{
+position:absolute;
+right:610px;
+top:480px;
+
+}
+
 
 #lohi
 {
@@ -611,8 +634,16 @@ right:200px;
 top:370px;
 }
 
+button#sel2
+{
+position:absolute;
+right:310px;
+top:370px;
+}
 
 
+
+/*
 .defileParent {
 	display: block;
 	margin: 3em auto;
@@ -620,8 +651,9 @@ top:370px;
 	position: relative;
 	table-layout: fixed;
 	width: 900px;
-	height:50px;
+	height:60px;
 	background-color: #cccccc;
+	
 	border-radius:5px;
 	
 }
@@ -635,6 +667,7 @@ top:370px;
 	margin-top:12.5px;
 	text-align:left;
 	height:25px;
+	
 
 }
 
@@ -644,7 +677,7 @@ top:370px;
 	white-space:nowrap;
 	/*padding-left:10px;*/
 }
-
+*/
 
 @-moz-keyframes marqueelike {
  	0% {margin-left:0;}
@@ -662,9 +695,11 @@ top:370px;
   /min-width: 200%;
 
   margin-top:100px;
-  background-color: lightgray;
-  height:60px;
-  padding-top:20px;
+  background-color: #14485f;
+  height:70px;
+  padding-top:25px;
+  color: white;
+  
   
               /* 2 fois la largeur du conteneur */
 }
@@ -708,8 +743,8 @@ width:320px;
 height:210px;
 margin-left:30px;
 
-border:1px solid black;
-border-radius:5px;
+border:1px solid darkgrey;
+border-radius:1px;
 }
 
 .sel_b
@@ -740,6 +775,105 @@ background-color:white;
 writing-mode: vertical-rl;
 min-width:65px;
 }
+
+
+
+
+/* custom loader  */
+
+
+.lds-default {
+  margin-left:750px;
+  
+   margin-top:130px;
+    margin-bottom:120px;
+  display: inline-block;
+  position: relative;
+  width: 224px;
+  height: 224px;
+  
+}
+.lds-default div {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: white; /*#14485f;*/
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 101.5px;
+  left: 185.5px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 63px;
+  left: 175px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 31.5px;
+  left: 143.5px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 21px;
+  left: 101.5px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 31.5px;
+  left: 63px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 63px;
+  left: 31.5px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 101.5px;
+  left: 21px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 143.5px;
+  left: 31.5px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 175px;
+  left: 63px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 185.5px;
+  left: 101.5px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 175px;
+  left: 143.5px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 143.5px;
+  left: 175px;
+}
+@keyframes lds-default {
+  0%{
+   
+    background:#14485f;
+  }
+  60% {
+    
+    background:white;
+    
+  }
+}
+
+
 
 
 
